@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/unamebg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bgmove"
-    android:id="@+id/unamebg">
+    android:orientation="vertical">
 
-    <EditText
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_username"/>
-
-    <Button
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:id="@+id/btn_submit"/>
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/q"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/uname" />
+
+        <EditText
+            android:id="@+id/et_username"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/q"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:alpha="0.50"
+            android:background="#ffffff"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="100dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/et_username"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/field"
+            android:fontFamily="monospace"
+            android:text="Submit"
+            android:textSize="10dp"
+            android:textStyle="italic" />
 
 
-
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btn_market"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/market"/>
+
+        <ImageView
+            android:id="@+id/btn_inventory"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/btn_market"
+            android:background="@drawable/inv" />
+
+        <ImageView
+            android:id="@+id/btn_settings"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/btn_help"
+            android:background="@drawable/settings"
+            />
+
+        <ImageView
+            android:id="@+id/btn_help"
+            android:layout_width="30dp"
+            android:layout_height="28dp"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/help"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

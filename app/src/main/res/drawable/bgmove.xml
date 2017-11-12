@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
-    <item android:drawable="@drawable/bg10" android:duration="250" />
-    <item android:drawable="@drawable/bg11" android:duration="250" />
-    <item android:drawable="@drawable/bg12" android:duration="250" />
-    <item android:drawable="@drawable/bg13" android:duration="250" />
+    <item android:drawable="@drawable/bgn1" android:duration="250" />
+    <item android:drawable="@drawable/bgn2" android:duration="250" />
+    <item android:drawable="@drawable/bgn2" android:duration="250" />
+    <item android:drawable="@drawable/bgn3" android:duration="250" />
 </animation-list>
