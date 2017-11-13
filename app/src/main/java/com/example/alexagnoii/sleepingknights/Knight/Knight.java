@@ -32,7 +32,7 @@ public class Knight {
     private long gold;
     private Weapon weapon;
     private Armor armor;
-    private Armor sheld;
+    private Armor shield;
 
     public long getId() {
         return id;
@@ -82,13 +82,9 @@ public class Knight {
         this.armor = armor;
     }
 
-    public Armor getSheld() {
-        return sheld;
-    }
+    public Armor getShield() {return shield;}
 
-    public void setSheld(Armor sheld) {
-        this.sheld = sheld;
-    }
+    public void setShield(Armor shield) {this.shield = shield;}
 
     public String getName() {
         return name;

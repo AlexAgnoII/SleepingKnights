@@ -13,6 +13,8 @@ public class Weapon extends Item {
         this.attackIncrease = attackIncrease;
     }
 
+    public Weapon(){super(null, null, 0);}
+
     public int getAttackIncrease() {
         return attackIncrease;
     }

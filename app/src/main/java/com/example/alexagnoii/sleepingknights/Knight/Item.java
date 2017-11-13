@@ -13,6 +13,7 @@ public class Item {
     public static final String COLUMN_TYPE = "type";//type of item
     public static final String COLUMN_COST = "cost";//type of item
 
+    protected long id;
     protected String name;
     protected String description;
     protected int cost;
@@ -46,4 +47,8 @@ public class Item {
     public void setCost(int cost) {
         this.cost = cost;
     }
+
+    public long getId() {return id;}
+
+    public void setId(long id) {this.id = id;}
 }

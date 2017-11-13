@@ -13,6 +13,10 @@ public class Armor extends Item{
         this.defenseIncrease = defenseIncrease;
     }
 
+    public Armor(){
+        super(null, null, 0);
+    }
+
     public int getDefenseIncrease() {
         return defenseIncrease;
     }
