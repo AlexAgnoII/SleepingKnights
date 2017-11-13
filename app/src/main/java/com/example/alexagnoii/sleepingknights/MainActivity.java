@@ -39,9 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                DatabaseHelper dm = new DatabaseHelper(getBaseContext());
+                //CHECK IF DATABASE HAS A PLAYER
+
+                //if doesnt have, go to char creation
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), SignUp.class);
-                startActivityForResult(i, 0);
+                startActivity(i);
+                finish(); //finish this activity.
+
+                //if have, go to gameactivity
             }
         });
     }

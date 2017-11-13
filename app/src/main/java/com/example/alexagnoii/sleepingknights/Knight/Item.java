@@ -5,6 +5,14 @@ package com.example.alexagnoii.sleepingknights.Knight;
  */
 
 public class Item {
+    public static final String TABLE_NAME = "item";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_DESCRIPTION ="description";
+    public static final String COLUMN_BOOST = "boost"; //attk for weapon, def for armor, hp for potions.
+    public static final String COLUMN_TYPE = "type";//type of item
+    public static final String COLUMN_COST = "cost";//type of item
+
     protected String name;
     protected String description;
     protected int cost;

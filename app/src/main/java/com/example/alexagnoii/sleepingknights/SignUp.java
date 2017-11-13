@@ -1,5 +1,6 @@
 package com.example.alexagnoii.sleepingknights;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -36,9 +37,14 @@ public class SignUp extends AppCompatActivity {
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Add to database
+                //Initialize user + Add to database
+                String userName = username.getText().toString();
 
                 //Proceed to character creation
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), CharCreationActivity.class);
+                startActivity(i);
+                finish(); //finish this activity.
 
             }
         });
