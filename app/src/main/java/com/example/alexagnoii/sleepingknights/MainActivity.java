@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView ivPerson;
-    private Button btnplay;
+    private Button btnPlay;
     private RelativeLayout bg;
 
     @Override
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         //test push
 
         ivPerson = (ImageView)findViewById(R.id.ivPerson);
-        btnplay = (Button)findViewById(R.id.btn_play);
+        btnPlay = (Button)findViewById(R.id.btn_play);
         ivPerson.setBackgroundResource(R.drawable.walking);
 
         bg = (RelativeLayout) findViewById(R.id.mainbg);
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         frAnim1.start();
         frAnim2.start();
 
-        btnplay.setOnClickListener(new View.OnClickListener(){
+        btnPlay.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {

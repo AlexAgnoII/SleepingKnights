@@ -1,6 +1,7 @@
 package com.example.alexagnoii.sleepingknights;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,29 +17,34 @@ import android.widget.RelativeLayout;
 
 public class SignUp extends AppCompatActivity {
 
-    private EditText username;
-    private Button btnsubmit;
+    private EditText etUsername;
+    private Button btnSubmit;
     private RelativeLayout bg;
+    Typeface tf;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
 
-        username = (EditText)findViewById(R.id.et_username);
-        btnsubmit = (Button)findViewById(R.id.btn_submit);
+        etUsername = (EditText)findViewById(R.id.et_username);
+        btnSubmit = (Button)findViewById(R.id.btn_submit);
 
-        bg = (RelativeLayout) findViewById(R.id.unamebg);
+        bg = (RelativeLayout) findViewById(R.id.bg);
         bg.setBackgroundResource(R.drawable.bgmove);
+
+        tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
+
+        etUsername.setTypeface(tf);
 
         AnimationDrawable frAnim2 = (AnimationDrawable) bg.getBackground();
         frAnim2.start();
 
-        btnsubmit.setOnClickListener(new View.OnClickListener() {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Initialize user + Add to database
-                String userName = username.getText().toString();
+                String userName = etUsername.getText().toString();
 
                 //Proceed to character creation
                 Intent i = new Intent();

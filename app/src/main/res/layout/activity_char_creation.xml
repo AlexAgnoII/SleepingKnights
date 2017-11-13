@@ -1,75 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.alexagnoii.sleepingknights.CharCreationActivity">
+    tools:context="com.example.alexagnoii.sleepingknights.CharCreationActivity"
+    android:background="@drawable/bgmove"
+    android:id="@+id/bg">
+
+    <ImageView
+        android:id="@+id/lblsetstat"
+        android:layout_width="250dp"
+        android:layout_height="25dp"
+        android:background="@drawable/setstats"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Insert message here "
-            android:id="@+id/createChar_message_with_username"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:id="@+id/remaining_points"/>
-    </LinearLayout>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/lblsetstat">
 
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
+        <RelativeLayout
+            android:id="@+id/layoutHP"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Strength"/>
-        <NumberPicker
-            android:id="@+id/numPicker_strength"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_margin="40dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
+            <TextView
+                android:id="@+id/tv_HP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50"
+                android:textSize="55dp"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/btn_HPminus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="-"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_HP"
+                />
+
+            <TextView
+                android:id="@+id/lbl_HP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HP"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_HP"
+                android:layout_toRightOf="@id/btn_HPminus"/>
+
+            <Button
+                android:id="@+id/btn_HPplus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="+"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_HP"
+                android:layout_toRightOf="@id/lbl_HP"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutATK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Defense"/>
-        <NumberPicker
-            android:id="@+id/numPicker_defense"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+            android:layout_toRightOf="@id/layoutHP"
+            android:layout_margin="40dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
+            <TextView
+                android:id="@+id/tv_ATK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="55dp"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/btn_ATKminus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="-"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_ATK"
+                />
+
+            <TextView
+                android:id="@+id/lbl_ATK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ATK"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_ATK"
+                android:layout_toRightOf="@id/btn_ATKminus"/>
+
+            <Button
+                android:id="@+id/btn_ATKplus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="+"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_ATK"
+                android:layout_toRightOf="@id/lbl_ATK"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutDEF"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Health"/>
-        <NumberPicker
-            android:id="@+id/numPicker_health"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_toRightOf="@id/layoutATK"
+            android:layout_margin="40dp">
+
+            <TextView
+                android:id="@+id/tv_DEF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="55dp"
+                android:textColor="#ffffff"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/btn_DEFminus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="-"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_DEF"
+                />
+
+            <TextView
+                android:id="@+id/lbl_DEF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEF"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_DEF"
+                android:layout_toRightOf="@id/btn_DEFminus"/>
+
+            <Button
+                android:id="@+id/btn_DEFplus"
+                android:layout_width="20dp"
+                android:layout_height="35dp"
+                android:textSize="30dp"
+                android:text="+"
+                android:background="@android:color/transparent"
+                android:textColor="#ffffff"
+                android:layout_below="@id/tv_DEF"
+                android:layout_toRightOf="@id/lbl_DEF"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DONE"
-        android:id="@+id/create_done"/>
+        android:id="@+id/btn_CCproceed"
+        android:layout_width="100dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/field"
+        android:fontFamily="monospace"
+        android:text="PROCEED"
+        android:textSize="10dp"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="35dp"
+        />
 
-</LinearLayout>
+</RelativeLayout>
