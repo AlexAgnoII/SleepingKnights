@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.example.alexagnoii.sleepingknights.CharCreationActivity"
     android:background="@drawable/bgmove"
-    android:id="@+id/bg">
+    android:id="@+id/mainbg">
 
     <ImageView
         android:id="@+id/lblsetstat"
@@ -14,7 +14,8 @@
         android:layout_height="25dp"
         android:background="@drawable/setstats"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"/>
+        android:layout_marginTop="45dp"
+        android:layout_marginBottom="15dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,11 +31,11 @@
             android:layout_margin="40dp">
 
             <TextView
-                android:id="@+id/tv_HP"
+                android:id="@+id/lbl_HP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50"
-                android:textSize="55dp"
+                android:text="HP"
+                android:textSize="30dp"
                 android:textColor="#ffffff"
                 android:layout_centerHorizontal="true"/>
 
@@ -46,29 +47,31 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_HP"
+                android:layout_below="@id/lbl_HP"
                 />
 
             <TextView
-                android:id="@+id/lbl_HP"
+                android:id="@+id/tv_HP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HP"
-                android:textSize="30dp"
+                android:text="50"
+                android:textSize="55dp"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_HP"
-                android:layout_toRightOf="@id/btn_HPminus"/>
+                android:layout_toRightOf="@id/btn_HPminus"
+                android:layout_below="@id/lbl_HP"
+                />
 
             <Button
                 android:id="@+id/btn_HPplus"
                 android:layout_width="20dp"
                 android:layout_height="35dp"
-                android:textSize="30dp"
-                android:text="+"
                 android:background="@android:color/transparent"
+                android:text="+"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_HP"
-                android:layout_toRightOf="@id/lbl_HP"/>
+                android:textSize="30dp"
+                android:layout_below="@id/lbl_HP"
+                android:layout_toRightOf="@id/tv_HP"
+               />
         </RelativeLayout>
 
         <RelativeLayout
@@ -79,11 +82,11 @@
             android:layout_margin="40dp">
 
             <TextView
-                android:id="@+id/tv_ATK"
+                android:id="@+id/lbl_ATK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="55dp"
+                android:text="ATK"
+                android:textSize="30dp"
                 android:textColor="#ffffff"
                 android:layout_centerHorizontal="true"/>
 
@@ -95,29 +98,31 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_ATK"
+                android:layout_below="@id/lbl_ATK"
                 />
 
             <TextView
-                android:id="@+id/lbl_ATK"
+                android:id="@+id/tv_ATK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ATK"
-                android:textSize="30dp"
+                android:text="1"
+                android:textSize="55dp"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_ATK"
-                android:layout_toRightOf="@id/btn_ATKminus"/>
+                android:layout_toRightOf="@id/btn_ATKminus"
+                android:layout_below="@id/lbl_ATK"
+                />
 
             <Button
                 android:id="@+id/btn_ATKplus"
                 android:layout_width="20dp"
                 android:layout_height="35dp"
-                android:textSize="30dp"
-                android:text="+"
                 android:background="@android:color/transparent"
+                android:text="+"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_ATK"
-                android:layout_toRightOf="@id/lbl_ATK"/>
+                android:textSize="30dp"
+                android:layout_below="@id/lbl_ATK"
+                android:layout_toRightOf="@id/tv_ATK"
+                />
         </RelativeLayout>
 
         <RelativeLayout
@@ -128,11 +133,11 @@
             android:layout_margin="40dp">
 
             <TextView
-                android:id="@+id/tv_DEF"
+                android:id="@+id/lbl_DEF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textSize="55dp"
+                android:text="DEF"
+                android:textSize="30dp"
                 android:textColor="#ffffff"
                 android:layout_centerHorizontal="true"/>
 
@@ -144,29 +149,31 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_DEF"
+                android:layout_below="@id/lbl_DEF"
                 />
 
             <TextView
-                android:id="@+id/lbl_DEF"
+                android:id="@+id/tv_DEF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEF"
-                android:textSize="30dp"
+                android:text="1"
+                android:textSize="55dp"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_DEF"
-                android:layout_toRightOf="@id/btn_DEFminus"/>
+                android:layout_toRightOf="@id/btn_DEFminus"
+                android:layout_below="@id/lbl_DEF"
+                />
 
             <Button
                 android:id="@+id/btn_DEFplus"
                 android:layout_width="20dp"
                 android:layout_height="35dp"
-                android:textSize="30dp"
-                android:text="+"
                 android:background="@android:color/transparent"
+                android:text="+"
                 android:textColor="#ffffff"
-                android:layout_below="@id/tv_DEF"
-                android:layout_toRightOf="@id/lbl_DEF"/>
+                android:textSize="30dp"
+                android:layout_below="@id/lbl_DEF"
+                android:layout_toRightOf="@id/tv_DEF"
+                />
         </RelativeLayout>
     </LinearLayout>
 
