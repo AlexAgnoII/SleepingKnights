@@ -15,9 +15,9 @@ import android.widget.RelativeLayout;
 
 public class SignUp extends AppCompatActivity {
 
-    EditText username;
-    Button btnsubmit;
-    RelativeLayout bg;
+    private EditText username;
+    private Button btnsubmit;
+    private RelativeLayout bg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +36,9 @@ public class SignUp extends AppCompatActivity {
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Add to database
+
+                //Proceed to character creation
 
             }
         });

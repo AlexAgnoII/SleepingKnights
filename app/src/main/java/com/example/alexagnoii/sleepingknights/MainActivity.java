@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView ivPerson;
-    Button btnplay;
-    RelativeLayout bg;
+    private ImageView ivPerson;
+    private Button btnplay;
+    private RelativeLayout bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
