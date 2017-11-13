@@ -146,6 +146,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return k;
     }
 
+    public long addArmor(Armor armor){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Armor.COLUMN_NAME, armor.getName());
+        contentValues.put(Armor.COLUMN_BOOST, armor.getDefenseIncrease());
+        contentValues.put(Armor.COLUMN_DESCRIPTION, armor.getDescription());
+        contentValues.put(Armor.COLUMN_COST, armor.getCost());
+
+        long id = db.insert(Armor.TABLE_NAME, null, contentValues);
+        db.close();
+        return id;
+    }
+
+    public long addWeapon(Weapon weapon){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
+        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
+        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
+        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
+
+        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
+        db.close();
+        return id;
+    }
+
     public Armor getArmor(long id){
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(Armor.TABLE_NAME,
