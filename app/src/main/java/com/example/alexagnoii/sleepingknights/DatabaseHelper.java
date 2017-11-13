@@ -17,7 +17,6 @@ import com.example.alexagnoii.sleepingknights.Knight.Weapon;
  */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
     public static final String SCHEMA = "game";
     public static final int VERSION = 1;
 
@@ -146,6 +145,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return k;
     }
 
+    public boolean deleteKnight (long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+        int rowsAffected = db.delete(Knight.TABLE_NAME,
+                Knight.COLUMN_ID +  "= ?",
+                new String[]{id + ""});
+        return rowsAffected > 0;
+    }
+
     public long addArmor(Armor armor){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -159,17 +167,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long addWeapon(Weapon weapon){
+    public boolean updateArmor(Armor updatedArmor, int id){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
-        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
-        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
-        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
+        contentValues.put(Armor.COLUMN_NAME, updatedArmor.getName());
+        contentValues.put(Armor.COLUMN_BOOST, updatedArmor.getDefenseIncrease());
+        contentValues.put(Armor.COLUMN_DESCRIPTION, updatedArmor.getDescription());
+        contentValues.put(Armor.COLUMN_COST, updatedArmor.getCost());
 
-        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
-        db.close();
-        return id;
+        db.update(Armor.TABLE_NAME, contentValues, Armor.COLUMN_ID + "=?", new String[]{updatedArmor.getId() + ""});
+        return true;
     }
 
     public Armor getArmor(long id){
@@ -196,6 +203,40 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return a;
     }
 
+    public boolean deleteArmor (long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+        int rowsAffected = db.delete(Armor.TABLE_NAME,
+                Armor.COLUMN_ID +  "= ?",
+                new String[]{id + ""});
+        return rowsAffected > 0;
+    }
+
+    public long addWeapon(Weapon weapon){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
+        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
+        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
+        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
+
+        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
+        db.close();
+        return id;
+    }
+
+    public boolean updateWeapon(Weapon updatedWeapon, int id){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Armor.COLUMN_NAME, updatedWeapon.getName());
+        contentValues.put(Armor.COLUMN_BOOST, updatedWeapon.getAttackIncrease());
+        contentValues.put(Armor.COLUMN_DESCRIPTION, updatedWeapon.getDescription());
+        contentValues.put(Armor.COLUMN_COST, updatedWeapon.getCost());
+
+        db.update(Weapon.TABLE_NAME, contentValues, Weapon.COLUMN_ID + "=?", new String[]{updatedWeapon.getId() + ""});
+        return true;
+    }
+
     public Weapon getWeapon(long id){
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(Armor.TABLE_NAME,
@@ -217,5 +258,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return w;
+    }
+
+    public boolean deleteWeapon (long id){
+
+        SQLiteDatabase db = getWritableDatabase();
+        int rowsAffected = db.delete(Weapon.TABLE_NAME,
+                Weapon.COLUMN_ID +  "= ?",
+                new String[]{id + ""});
+        return rowsAffected > 0;
     }
 }
