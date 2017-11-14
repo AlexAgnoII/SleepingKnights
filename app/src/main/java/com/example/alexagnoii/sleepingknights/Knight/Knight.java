@@ -1,5 +1,7 @@
 package com.example.alexagnoii.sleepingknights.Knight;
 
+import android.widget.TextView;
+
 /**
  * Created by Alex Agno II on 11/13/2017.
  */
@@ -50,6 +52,20 @@ public class Knight {
 
     public Knight() {
 
+    }
+
+    public Knight(String userName, int healthPoints, int attack, int defense) {
+        this.name = userName;
+        this.healthPoints = healthPoints;
+        this.currentHP = healthPoints;
+        this.attack = attack;
+        this.defense = defense;
+        level = 1;
+        exp = 1;
+        gold = 100;
+        weapon = new Weapon(1);
+        armor = new Armor(2);
+        shield = new Armor(3);
     }
 
     public long getId() {

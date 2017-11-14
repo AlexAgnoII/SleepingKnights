@@ -18,14 +18,20 @@ import android.widget.TextView;
 
 import com.example.alexagnoii.sleepingknights.Knight.Knight;
 
-public class CharCreationActivity extends AppCompatActivity {
+public class CharCreationActivity extends AppCompatActivity{
 
-    private final int maxStatAdded = 5;
+    private final int maxStatAdded = 5,
+                      minHealth = 50,
+                      min = 1;
     private String userName;
     private DatabaseHelper dbHelper;
     private Button btnCCproceed;
     private RelativeLayout bg;
-    private TextView tvHP, lblHP, tvATK, lblATK, tvDEF, lblDEF, lblMsg, lblPts;
+    private TextView tvHP, lblHP, tvATK, lblATK, tvDEF, lblDEF, lblMsg, lblPts,
+                     tvHPUP, tvHPDOWN,
+                     tvATKUP, tvATKDOWN,
+                     tvDEFUP, tvDEFDOWN;
+
     // tvHP ATK DEF are the values, lbl are just labels
     //lblMsg is the message shown to the user.
     //lmlPts is the remaining points that the user can use.
@@ -69,17 +75,156 @@ public class CharCreationActivity extends AppCompatActivity {
         lblMsg.setTypeface(tf);
         lblPts.setTypeface(tf);
 
-        lblMsg.setText("Hello " + userName + "! Your remaining points:  ");
+        lblMsg.setText("Hello " + userName + "! Your remaining points to add:  ");
         lblPts.setText(maxStatAdded+"");
 
         //Do some stuff that would calculate the stats added.
-        dbHelper = new DatabaseHelper(getBaseContext());
+        tvATKUP = (TextView) findViewById(R.id.btn_ATKplus);
+        tvATKDOWN = (TextView) findViewById(R.id.btn_ATKminus);
 
+        tvDEFUP = (TextView) findViewById(R.id.btn_DEFplus);
+        tvDEFDOWN = (TextView) findViewById(R.id.btn_DEFminus);
+
+        tvHPUP = (TextView) findViewById(R.id.btn_HPplus);
+        tvHPDOWN = (TextView) findViewById(R.id.btn_HPminus);
+
+        tvATKUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvATK.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != 0) {
+                    Log.i("LOGS|AddStat", "Can add atk.");
+                    remaining--;
+                    original++;
+
+                    tvATK.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|AddStat", "Can no longer add atk.");
+                }
+            }
+        });
+
+        tvATKDOWN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvATK.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != maxStatAdded && original != min) {
+                    Log.i("LOGS|lowerStat", "Can lower atk.");
+                    remaining++;
+                    original--;
+
+                    tvATK.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|lowerStat", "Can no longer lower atk.");
+                }
+
+            }
+        });
+
+        tvDEFUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvDEF.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != 0) {
+                    Log.i("LOGS|AddStat", "Can add atk.");
+                    remaining--;
+                    original++;
+
+                    tvDEF.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|AddStat", "Can no longer add atk.");
+                }
+            }
+        });
+
+        tvDEFDOWN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvDEF.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != maxStatAdded && original != min) {
+                    Log.i("LOGS|lowerStat", "Can lower atk.");
+                    remaining++;
+                    original--;
+
+                    tvDEF.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|lowerStat", "Can no longer lower atk.");
+                }
+
+            }
+        });
+
+        tvHPUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvHP.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != 0) {
+                    Log.i("LOGS|AddStat", "Can add atk.");
+                    remaining--;
+                    original++;
+
+                    tvHP.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|AddStat", "Can no longer add atk.");
+                }
+            }
+        });
+
+        tvHPDOWN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int original = parseStringToInt(tvHP.getText());
+                int remaining = parseStringToInt(lblPts.getText());
+
+                if (remaining != maxStatAdded && original != minHealth) {
+                    Log.i("LOGS|lowerStat", "Can lower atk.");
+                    remaining++;
+                    original--;
+
+                    tvHP.setText(original+"");
+                    lblPts.setText(remaining+"");
+                }
+
+                else {
+                    Log.i("LOGS|lowerStat", "Can no longer lower atk.");
+                }
+
+            }
+        });
+
+        dbHelper = new DatabaseHelper(getBaseContext());
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Save knight to db + save the ID on shared preference.
-                Knight k = new Knight(userName);
+                Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
+                                                parseStringToInt(tvATK.getText()),
+                                                parseStringToInt(tvDEF.getText()));
                 dbHelper.addKnight(k);
                 String id = dbHelper.getKnightID()+"";
 
@@ -98,5 +243,13 @@ public class CharCreationActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+
+    private int parseStringToInt(CharSequence value) {
+        return Integer.parseInt(value.toString());
+    }
+
 }

@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 //if have, go to gameactivity
                 else {
                     Log.i("LOGS|MAINACTIVITY", "user found from preference with ID: " + userID);
-                    i.putExtra("id", userID);
-                    i.setClass(getBaseContext(), GameActivity.class);
+                    i.setClass(getBaseContext(), Splash.class);
                     startActivity(i);
                     finish();
                 }

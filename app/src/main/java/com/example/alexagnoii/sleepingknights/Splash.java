@@ -36,8 +36,8 @@ public class Splash extends Activity {
             @Override
             public void run() {
                 Intent i = new Intent(Splash.this, GameActivity.class);
-                Splash.this.startActivity(i);
-                Splash.this.finish();
+                startActivity(i);
+                finish();
             }
         }, duration);
     }

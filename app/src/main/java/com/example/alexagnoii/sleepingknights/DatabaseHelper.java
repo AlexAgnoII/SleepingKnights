@@ -290,7 +290,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if(c.moveToFirst()) {
             id = c.getInt(c.getColumnIndex(Knight.COLUMN_ID));
         }
-
         return id;
     }
 }
