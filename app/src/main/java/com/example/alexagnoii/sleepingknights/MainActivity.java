@@ -1,7 +1,9 @@
 package com.example.alexagnoii.sleepingknights;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,21 +41,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         dbHelper = new DatabaseHelper(getBaseContext());
+        //dbHelper.deleteAll(); //temporary deletes the knights, call this for testing of preference.
         Log.i("mainActivity", "main");
         btnPlay.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-
-                //CHECK IF DATABASE HAS A PLAYER
-
-                //if doesnt have, go to char creation
+                SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                String userID = dsp.getString("id", null);
                 Intent i = new Intent();
-                i.setClass(getBaseContext(), SignUp.class);
-                startActivity(i);
-                finish(); //finish this activity.
+
+                //CHECK IF SHAREDPREFERENCE HAS A PLAYER
+                if(userID == null) {
+                    //if doesnt have, go to char creation
+                    Log.i("LOGS|MAINACTIVITY", "no user found from preference");
+                    i.setClass(getBaseContext(), SignUp.class);
+                    startActivity(i);
+                    finish(); //finish this activity.
+
+                }
 
                 //if have, go to gameactivity
+                else {
+                    Log.i("LOGS|MAINACTIVITY", "user found from preference with ID: " + userID);
+                    i.putExtra("id", userID);
+                    i.setClass(getBaseContext(), GameActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+
             }
         });
     }

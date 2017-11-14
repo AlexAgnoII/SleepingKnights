@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
 
         super(context, SCHEMA, null, VERSION);
-        Log.i("constructorDB", "helpme");
+        Log.i("LOGS|databaseHelper", "Constructor");
         SQLiteDatabase db = this.getWritableDatabase();
     }
 
@@ -34,7 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String knightTable;
         String itemTable;
         String inventoryTable;
-        Log.i("databasehelper", "onCreate");
+        Log.i("LOGS|databaseHelper", "onCreate");
 
         knightTable = "CREATE TABLE " + Knight.TABLE_NAME + " ("
                 + Knight.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -84,6 +84,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public long addKnight(Knight knight){
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
         contentValues.put(Knight.COLUMN_NAME, knight.getName());
         contentValues.put(Knight.COLUMN_HP, knight.getHealthPoints());
@@ -94,8 +95,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Knight.COLUMN_EXP, knight.getExp());
         contentValues.put(Knight.COLUMN_GOLD, knight.getGold());
         contentValues.put(Knight.COLUMN_WEAPON, knight.getWeapon().getId());
-        contentValues.put(Knight.COLUMN_ARMOR, knight.getArmor().getId());
-        contentValues.put(Knight.COLUMN_SHIELD, knight.getShield().getId());
+        contentValues.put(Knight.COLUMN_ARMOR, knight.getWeapon().getId());
+        contentValues.put(Knight.COLUMN_SHIELD, knight.getWeapon().getId());
 
         long id = db.insert(Knight.TABLE_NAME, null, contentValues);
         db.close();
@@ -273,5 +274,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Weapon.COLUMN_ID +  "= ?",
                 new String[]{id + ""});
         return rowsAffected > 0;
+    }
+
+    public void deleteAll() {
+        SQLiteDatabase db = getWritableDatabase();
+
+        db.execSQL("DELETE FROM " + Knight.TABLE_NAME);
+    }
+
+    public int getKnightID() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(Knight.TABLE_NAME, null, null, null, null, null, null);
+        int id = -1;
+
+        if(c.moveToFirst()) {
+            id = c.getInt(c.getColumnIndex(Knight.COLUMN_ID));
+        }
+
+        return id;
     }
 }

@@ -43,9 +43,9 @@ public class Knight {
         level = 1;
         exp = 1;
         gold = 100;
-        weapon = null;
-        armor = null;
-        shield = null;
+        weapon = new Weapon(1);
+        armor = new Armor(2);
+        shield = new Armor(3);
     }
 
     public Knight() {

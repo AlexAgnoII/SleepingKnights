@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +48,7 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 //Initialize user
                 String userName = etUsername.getText().toString();
-
+                Log.i("LOGS|SIGNUP ACTIVITY", "username entered-> " + userName);
 
                 //Proceed to character creation (Send name as intent)
                 Intent i = new Intent();

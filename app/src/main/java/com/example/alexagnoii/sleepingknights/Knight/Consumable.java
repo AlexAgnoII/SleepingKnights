@@ -8,10 +8,15 @@ public class Consumable extends Item {
 
     private int pointsAdded; //Health points added (for now). (Or for future reference, defense added (for defense potions) etc.
 
-    public Consumable(String name, String description, int cost, int pointsAdded) {
-        super(name, description, cost);
+    public Consumable(long id, String name, String description, int cost, int pointsAdded) {
+        super(id, name, description, cost);
 
         this.pointsAdded = pointsAdded;
+    }
+
+    public Consumable() {
+        super(0, null, null, 0);
+
     }
 
     public int getPointsAdded() {

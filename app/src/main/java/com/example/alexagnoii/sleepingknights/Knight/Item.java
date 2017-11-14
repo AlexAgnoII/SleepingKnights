@@ -18,7 +18,8 @@ public class Item {
     protected String description;
     protected int cost;
 
-    public Item(String name, String description, int cost) {
+    public Item(long id, String name, String description, int cost) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.cost = cost;

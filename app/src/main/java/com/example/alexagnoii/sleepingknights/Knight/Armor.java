@@ -8,13 +8,17 @@ public class Armor extends Item{
 
     private int defenseIncrease;
 
-    public Armor(String name, String description, int cost, int defenseIncrease) {
-        super(name, description, cost);
+    public Armor(long id, String name, String description, int cost, int defenseIncrease) {
+        super(id, name, description, cost);
         this.defenseIncrease = defenseIncrease;
     }
 
-    public Armor(){
-        super(null, null, 0);
+    public Armor(long id){
+        super(id, null, null, 0);
+    }
+
+    public Armor() {
+        super(0, null, null, 0);
     }
 
     public int getDefenseIncrease() {
