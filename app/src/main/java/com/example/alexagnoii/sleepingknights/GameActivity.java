@@ -1,6 +1,6 @@
 package com.example.alexagnoii.sleepingknights;
 
-import android.graphics.drawable.AnimationDrawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,10 +23,15 @@ public class GameActivity extends AppCompatActivity {
         btnInventory = (Button)findViewById(R.id.btn_inventory);
 
 
-        btnSettings.setOnClickListener(new View.OnClickListener() {
+        btnInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // open dialog
+                SimpleDialog sd = new SimpleDialog();
+                sd.show(getSupportFragmentManager(), "");
+
+
+
+
             }
         });
 
