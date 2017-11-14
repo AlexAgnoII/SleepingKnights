@@ -34,6 +34,24 @@ public class Knight {
     private Armor armor;
     private Armor shield;
 
+    public Knight(String name) {
+        this.name = name;
+        healthPoints = 50;
+        currentHP = 50;
+        attack = 1;
+        defense = 1;
+        level = 1;
+        exp = 1;
+        gold = 100;
+        weapon = null;
+        armor = null;
+        shield = null;
+    }
+
+    public Knight() {
+
+    }
+
     public long getId() {
         return id;
     }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivPerson;
     private Button btnPlay;
     private RelativeLayout bg;
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +37,14 @@ public class MainActivity extends AppCompatActivity {
         frAnim1.start();
         frAnim2.start();
 
+
+        dbHelper = new DatabaseHelper(getBaseContext());
+        Log.i("mainActivity", "main");
         btnPlay.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view) {
-                DatabaseHelper dm = new DatabaseHelper(getBaseContext());
+
                 //CHECK IF DATABASE HAS A PLAYER
 
                 //if doesnt have, go to char creation

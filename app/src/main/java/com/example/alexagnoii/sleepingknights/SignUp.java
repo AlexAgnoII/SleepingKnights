@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
+import com.example.alexagnoii.sleepingknights.Knight.Knight;
+
 /**
  * Created by jessganoww on 11/12/17.
  */
@@ -43,11 +45,13 @@ public class SignUp extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Initialize user + Add to database
+                //Initialize user
                 String userName = etUsername.getText().toString();
 
-                //Proceed to character creation
+
+                //Proceed to character creation (Send name as intent)
                 Intent i = new Intent();
+                i.putExtra("username", userName);
                 i.setClass(getBaseContext(), CharCreationActivity.class);
                 startActivity(i);
                 finish(); //finish this activity.

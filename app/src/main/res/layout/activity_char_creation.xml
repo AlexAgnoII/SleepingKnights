@@ -7,8 +7,21 @@
     tools:context="com.example.alexagnoii.sleepingknights.CharCreationActivity"
     android:background="@drawable/bgmove"
     android:id="@+id/mainbg">
-
+`
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message here: "
+        android:layout_centerHorizontal="true"
+        android:id="@+id/createMessage"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_alignRight="@id/createMessage"
+        android:id="@+id/pointsRemaining"/>
     <ImageView
+
         android:id="@+id/lblsetstat"
         android:layout_width="250dp"
         android:layout_height="25dp"

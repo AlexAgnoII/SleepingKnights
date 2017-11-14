@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.alexagnoii.sleepingknights.Knight.Armor;
 import com.example.alexagnoii.sleepingknights.Knight.Item;
@@ -18,10 +19,13 @@ import com.example.alexagnoii.sleepingknights.Knight.Weapon;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SCHEMA = "game";
-    public static final int VERSION = 1;
+    public static final int VERSION = 2;
 
     public DatabaseHelper(Context context) {
+
         super(context, SCHEMA, null, VERSION);
+        Log.i("constructorDB", "helpme");
+        SQLiteDatabase db = this.getWritableDatabase();
     }
 
 
@@ -30,6 +34,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String knightTable;
         String itemTable;
         String inventoryTable;
+        Log.i("databasehelper", "onCreate");
 
         knightTable = "CREATE TABLE " + Knight.TABLE_NAME + " ("
                 + Knight.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -38,8 +43,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Knight.COLUMN_DEFENSE + " INTEGER,"
                 + Knight.COLUMN_HP + " INTEGER,"
                 + Knight.COLUMN_CHP + " INTEGER,"
-                + Knight.COLUMN_ATTACK + " INTEGER,"
-                + Knight.COLUMN_DEFENSE + " INTEGER,"
                 + Knight.COLUMN_LEVEL + " INTEGER,"
                 + Knight.COLUMN_EXP + " INTEGER,"
                 + Knight.COLUMN_GOLD + " INTEGER,"
@@ -52,13 +55,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Item.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + Item.COLUMN_NAME + " TEXT,"
                 + Item.COLUMN_DESCRIPTION + " TEXT,"
-                + Item.COLUMN_TYPE + " TEXT,"
+                + Item.COLUMN_TYPE + " INTEGER,"
                 + Item.COLUMN_BOOST + " INTEGER,"
-                + Item.COLUMN_COST + " TEXT"
+                + Item.COLUMN_COST + " INTEGER"
                 + ");";
 
         inventoryTable = "CREATE TABLE inventory ("
-                + "inventory_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "_inventory_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "item_id INTEGER"
                 + ");";
 
@@ -69,10 +72,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        Log.i("databaseHelper", "update");
         String dropKnight = "DROP TABLE IF EXISTS " + Knight.TABLE_NAME+ ";";
         String dropItem = "DROP TABLE IF EXISTS " + Item.TABLE_NAME + ";";
+        String dropInvent = "DROP TABLE IF EXISTS inventory;";
         sqLiteDatabase.execSQL(dropKnight);
         sqLiteDatabase.execSQL(dropItem);
+        sqLiteDatabase.execSQL(dropInvent);
         onCreate(sqLiteDatabase);
     }
 
