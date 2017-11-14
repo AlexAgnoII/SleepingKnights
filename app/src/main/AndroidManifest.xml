@@ -30,6 +30,9 @@
 
         <activity android:name=".GameActivity"
                   android:screenOrientation="landscape" ></activity>
+
+        <activity android:name=".Splash"
+            android:screenOrientation="landscape" ></activity>
     </application>
 
 </manifest>

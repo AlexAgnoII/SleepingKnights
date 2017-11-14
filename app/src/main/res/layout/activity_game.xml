@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gabg"
+    android:id="@id/mainbg">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <Button
             android:id="@+id/btn_market"
             android:layout_width="30dp"
             android:layout_height="28dp"
             android:layout_margin="5dp"
             android:background="@drawable/market"/>
 
-        <ImageView
+        <Button
             android:id="@+id/btn_inventory"
             android:layout_width="30dp"
             android:layout_height="28dp"
@@ -22,7 +26,7 @@
             android:layout_toRightOf="@id/btn_market"
             android:background="@drawable/inv" />
 
-        <ImageView
+        <Button
             android:id="@+id/btn_settings"
             android:layout_width="30dp"
             android:layout_height="28dp"
@@ -31,7 +35,7 @@
             android:background="@drawable/settings"
             />
 
-        <ImageView
+        <Button
             android:id="@+id/btn_help"
             android:layout_width="30dp"
             android:layout_height="28dp"
@@ -41,4 +45,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

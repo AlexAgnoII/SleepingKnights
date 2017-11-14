@@ -40,7 +40,6 @@ public class CharCreationActivity extends AppCompatActivity {
         userName = getIntent().getExtras().getString("username");
         Log.i("Inside charcreation: ", userName);
 
-
         bg = (RelativeLayout) findViewById(R.id.mainbg);
         bg.setBackgroundResource(R.drawable.bgmove);
 
@@ -67,14 +66,19 @@ public class CharCreationActivity extends AppCompatActivity {
         lblATK.setTypeface(tf);
         tvDEF.setTypeface(tf);
         lblDEF.setTypeface(tf);
+        lblMsg.setTypeface(tf);
+        lblPts.setTypeface(tf);
 
-        lblMsg.setText("Hello " + userName + " here is your remaining points: ");
+        lblMsg.setText("Hello " + userName + "! Your remaining points:  ");
         lblPts.setText(maxStatAdded+"");
 
+<<<<<<< Updated upstream
         //Do some stuff that would calculate the stats added.
 
 
         dbHelper = new DatabaseHelper(getBaseContext());
+=======
+>>>>>>> Stashed changes
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +96,7 @@ public class CharCreationActivity extends AppCompatActivity {
 
                 //Redirect to GameActivity
                 Intent i = new Intent();
-                i.setClass(getBaseContext(), GameActivity.class);
+                i.setClass(getBaseContext(), Splash.class);
                 startActivity(i);
                 finish();
             }
