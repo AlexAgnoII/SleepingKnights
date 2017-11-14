@@ -72,13 +72,9 @@ public class CharCreationActivity extends AppCompatActivity {
         lblMsg.setText("Hello " + userName + "! Your remaining points:  ");
         lblPts.setText(maxStatAdded+"");
 
-<<<<<<< Updated upstream
         //Do some stuff that would calculate the stats added.
-
-
         dbHelper = new DatabaseHelper(getBaseContext());
-=======
->>>>>>> Stashed changes
+
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
