@@ -57,7 +57,7 @@ public class GameActivity extends AppCompatActivity {
         btnMarket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDialog sd = new SimpleDialog(R.layout.inventory);
+                SimpleDialog sd = new SimpleDialog(R.layout.market);
                 sd.show(getSupportFragmentManager(), "");
 
             }
