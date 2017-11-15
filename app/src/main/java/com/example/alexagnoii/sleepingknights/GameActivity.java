@@ -26,7 +26,7 @@ public class GameActivity extends AppCompatActivity {
         btnInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDialog sd = new SimpleDialog();
+                SimpleDialog sd = new SimpleDialog(R.layout.inventory);
                 sd.show(getSupportFragmentManager(), "");
 
 

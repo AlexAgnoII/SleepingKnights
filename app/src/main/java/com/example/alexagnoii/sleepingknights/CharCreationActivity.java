@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alexagnoii.sleepingknights.Knight.Knight;
 
@@ -138,7 +139,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 int remaining = parseStringToInt(lblPts.getText());
 
                 if (remaining != 0) {
-                    Log.i("LOGS|AddStat", "Can add atk.");
+                    Log.i("LOGS|AddStat", "Can add");
                     remaining--;
                     original++;
 
@@ -147,7 +148,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 }
 
                 else {
-                    Log.i("LOGS|AddStat", "Can no longer add atk.");
+                    Log.i("LOGS|AddStat", "Can no longer add");
                 }
             }
         });
@@ -159,7 +160,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 int remaining = parseStringToInt(lblPts.getText());
 
                 if (remaining != maxStatAdded && original != min) {
-                    Log.i("LOGS|lowerStat", "Can lower atk.");
+                    Log.i("LOGS|lowerStat", "Can lower");
                     remaining++;
                     original--;
 
@@ -168,7 +169,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 }
 
                 else {
-                    Log.i("LOGS|lowerStat", "Can no longer lower atk.");
+                    Log.i("LOGS|lowerStat", "Can no longer lower");
                 }
 
             }
@@ -181,7 +182,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 int remaining = parseStringToInt(lblPts.getText());
 
                 if (remaining != 0) {
-                    Log.i("LOGS|AddStat", "Can add atk.");
+                    Log.i("LOGS|AddStat", "Can add");
                     remaining--;
                     original++;
 
@@ -190,7 +191,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 }
 
                 else {
-                    Log.i("LOGS|AddStat", "Can no longer add atk.");
+                    Log.i("LOGS|AddStat", "Can no longer add");
                 }
             }
         });
@@ -202,7 +203,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 int remaining = parseStringToInt(lblPts.getText());
 
                 if (remaining != maxStatAdded && original != minHealth) {
-                    Log.i("LOGS|lowerStat", "Can lower atk.");
+                    Log.i("LOGS|lowerStat", "Can lower");
                     remaining++;
                     original--;
 
@@ -211,7 +212,7 @@ public class CharCreationActivity extends AppCompatActivity{
                 }
 
                 else {
-                    Log.i("LOGS|lowerStat", "Can no longer lower atk.");
+                    Log.i("LOGS|lowerStat", "Can no longer lower ");
                 }
 
             }
@@ -222,24 +223,29 @@ public class CharCreationActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //Save knight to db + save the ID on shared preference.
-                Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
-                                                parseStringToInt(tvATK.getText()),
-                                                parseStringToInt(tvDEF.getText()));
-                dbHelper.addKnight(k);
-                String id = dbHelper.getKnightID()+"";
+                if(parseStringToInt(lblPts.getText()) == 0) {
+                    Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
+                            parseStringToInt(tvATK.getText()),
+                            parseStringToInt(tvDEF.getText()));
+                    dbHelper.addKnight(k);
+                    String id = dbHelper.getKnightID()+"";
 
-                SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                SharedPreferences.Editor dspEditor = dsp.edit();
+                    SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                    SharedPreferences.Editor dspEditor = dsp.edit();
 
-                Log.i("LOGS|CHARCREATE", " id in preference: " + id);
-                dspEditor.putString("id", id);
-                dspEditor.apply();
+                    Log.i("LOGS|CHARCREATE", " id in preference: " + id);
+                    dspEditor.putString("id", id);
+                    dspEditor.apply();
 
-                //Redirect to GameActivity
-                Intent i = new Intent();
-                i.setClass(getBaseContext(), Splash.class);
-                startActivity(i);
-                finish();
+                    //Redirect to GameActivity
+                    Intent i = new Intent();
+                    i.setClass(getBaseContext(), Splash.class);
+                    startActivity(i);
+                    finish();
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Please don't waste your points!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

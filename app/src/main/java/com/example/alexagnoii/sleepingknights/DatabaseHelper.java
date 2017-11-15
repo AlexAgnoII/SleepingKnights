@@ -95,8 +95,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Knight.COLUMN_EXP, knight.getExp());
         contentValues.put(Knight.COLUMN_GOLD, knight.getGold());
         contentValues.put(Knight.COLUMN_WEAPON, knight.getWeapon().getId());
-        contentValues.put(Knight.COLUMN_ARMOR, knight.getWeapon().getId());
-        contentValues.put(Knight.COLUMN_SHIELD, knight.getWeapon().getId());
+        contentValues.put(Knight.COLUMN_ARMOR, knight.getArmor().getId());
+        contentValues.put(Knight.COLUMN_SHIELD, knight.getShield().getId());
 
         long id = db.insert(Knight.TABLE_NAME, null, contentValues);
         db.close();

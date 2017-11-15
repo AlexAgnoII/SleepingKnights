@@ -14,8 +14,15 @@ import android.view.View;
 
 public class SimpleDialog extends DialogFragment {
 
+    private int layout;
+
+    public SimpleDialog(int layout) {
+        this.layout = layout;
+    }
+
+
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        View v = LayoutInflater.from(getActivity()).inflate(R.layout.inventory, null);
+        View v = LayoutInflater.from(getActivity()).inflate(layout, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(v);
