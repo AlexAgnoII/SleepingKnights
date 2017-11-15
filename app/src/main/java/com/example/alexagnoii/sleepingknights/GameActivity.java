@@ -27,6 +27,7 @@ public class GameActivity extends AppCompatActivity {
         btnHelp = (Button)findViewById(R.id.btn_help);
         btnMarket = (Button)findViewById(R.id.btn_market);
         btnInventory = (Button)findViewById(R.id.btn_inventory);
+
         fm = getFragmentManager();
         hf = new HelpFragment();
         sf = new SettingsFragment();
@@ -36,6 +37,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SimpleDialog sd = new SimpleDialog(R.layout.inventory);
                 sd.show(getSupportFragmentManager(), "");
+
             }
         });
         btnSettings.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +50,15 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hf.show(fm, "help");
+
+
+            }
+        });
+        btnMarket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SimpleDialog sd = new SimpleDialog(R.layout.inventory);
+                sd.show(getSupportFragmentManager(), "");
 
             }
         });

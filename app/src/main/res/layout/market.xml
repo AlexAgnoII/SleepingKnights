@@ -29,7 +29,16 @@
         android:layout_height="200dp"
         android:layout_marginTop="5dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/panel"></RelativeLayout>
+        android:background="@drawable/panel">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_items"
+            android:layout_margin="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_submit"
