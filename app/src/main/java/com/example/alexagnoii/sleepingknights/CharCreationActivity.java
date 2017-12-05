@@ -228,13 +228,13 @@ public class CharCreationActivity extends AppCompatActivity{
                             parseStringToInt(tvATK.getText()),
                             parseStringToInt(tvDEF.getText()));
                     dbHelper.addKnight(k);
-                    String id = dbHelper.getKnightID()+"";
+                    long id = dbHelper.getKnightID();
 
                     SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     SharedPreferences.Editor dspEditor = dsp.edit();
 
                     Log.i("LOGS|CHARCREATE", " id in preference: " + id);
-                    dspEditor.putString("id", id);
+                    dspEditor.putLong("id", id);
                     dspEditor.apply();
 
                     //Redirect to GameActivity

@@ -68,6 +68,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(knightTable);
         sqLiteDatabase.execSQL(itemTable);
         sqLiteDatabase.execSQL(inventoryTable);
+
+
+        //Generate items that are inside teh system.
     }
 
     @Override
@@ -142,9 +145,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             k.setLevel(c.getLong(c.getColumnIndex(Knight.COLUMN_LEVEL)));
             k.setExp(c.getLong(c.getColumnIndex(Knight.COLUMN_EXP)));
             k.setCurrentHP(c.getInt(c.getColumnIndex(Knight.COLUMN_CHP)));
-            k.setArmor(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_ARMOR))));
-            k.setWeapon(getWeapon(c.getLong(c.getColumnIndex(Knight.COLUMN_WEAPON))));
-            k.setShield(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_SHIELD))));
+//            k.setArmor(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_ARMOR))));
+//            k.setWeapon(getWeapon(c.getLong(c.getColumnIndex(Knight.COLUMN_WEAPON))));
+//            k.setShield(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_SHIELD))));
             k.setId(id);
         }
         c.close();
@@ -278,17 +281,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteAll() {
         SQLiteDatabase db = getWritableDatabase();
-
         db.execSQL("DELETE FROM " + Knight.TABLE_NAME);
     }
 
-    public int getKnightID() {
+    public long getKnightID() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor c = db.query(Knight.TABLE_NAME, null, null, null, null, null, null);
-        int id = -1;
+        long id = -1;
 
         if(c.moveToFirst()) {
-            id = c.getInt(c.getColumnIndex(Knight.COLUMN_ID));
+            id = c.getLong(c.getColumnIndex(Knight.COLUMN_ID));
         }
         return id;
     }
