@@ -22,6 +22,7 @@ public class GameActivity extends AppCompatActivity {
     RelativeLayout bg;
     Button btnSettings, btnHelp, btnMarket, btnInventory;
     DatabaseHelper dbh;
+    Knight k;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,14 +78,17 @@ public class GameActivity extends AppCompatActivity {
 
         if(userID != -1) {
             Log.i("LOGS|GAMEACTIVITY", "User found = " + userID);
-            Knight k = dbh.getKnight(userID);
+            k = dbh.getKnight(userID);
 
-            Log.i("LOGS|GAMEACTIVITY", "User name: " + k.getName());
-            Log.i("LOGS|GAMEACTIVITY", "Health: " + k.getCurrentHP());
-            Log.i("LOGS|GAMEACTIVITY", "Attack: " + k.getAttack());
-            Log.i("LOGS|GAMEACTIVITY", "Defense: " + k.getDefense());
+            if(k != null) {
+                Log.i("LOGS|GAMEACTIVITY", "User name: " + k.getName());
+                Log.i("LOGS|GAMEACTIVITY", "Health: " + k.getCurrentHP());
+                Log.i("LOGS|GAMEACTIVITY", "Attack: " + k.getAttack());
+                Log.i("LOGS|GAMEACTIVITY", "Defense: " + k.getDefense());
+            }
 
-            
+
+
         }
 
         else {
