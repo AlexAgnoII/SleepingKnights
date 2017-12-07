@@ -53,6 +53,8 @@ public class CharCreationActivity extends AppCompatActivity{
         AnimationDrawable frAnim1 = (AnimationDrawable) bg.getBackground();
         frAnim1.start();
 
+        dbHelper = new DatabaseHelper(getBaseContext());
+
         btnCCproceed = (Button)findViewById(R.id.btn_CCproceed);
 
         tvHP = (TextView)findViewById(R.id.tv_HP);
@@ -218,31 +220,14 @@ public class CharCreationActivity extends AppCompatActivity{
             }
         });
 
-        dbHelper = new DatabaseHelper(getBaseContext());
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Save knight to db + save the ID on shared preference.
                 if(parseStringToInt(lblPts.getText()) == 0) {
-                    Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
-                            parseStringToInt(tvATK.getText()),
-                            parseStringToInt(tvDEF.getText()));
-                    dbHelper.addKnight(k);
-                    long id = dbHelper.getKnightID();
-
-                    SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                    SharedPreferences.Editor dspEditor = dsp.edit();
-
-                    Log.i("LOGS|CHARCREATE", " id in preference: " + id);
-                    dspEditor.putLong("id", id);
-                    dspEditor.apply();
-
-                    //Redirect to GameActivity
-                    Intent i = new Intent();
-                    i.setClass(getBaseContext(), Splash.class);
-                    startActivity(i);
-                    finish();
+                    addUser();
                 }
+
                 else {
                     Toast.makeText(getBaseContext(), "Please don't waste your points!", Toast.LENGTH_SHORT).show();
                 }
@@ -251,6 +236,33 @@ public class CharCreationActivity extends AppCompatActivity{
 
 
 
+    }
+
+    private void addUser() {
+        Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
+                parseStringToInt(tvATK.getText()),
+                parseStringToInt(tvDEF.getText()));
+        dbHelper.addKnight(k);
+        long id = dbHelper.getKnightID();
+
+        if(id != -1) {
+            SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+            SharedPreferences.Editor dspEditor = dsp.edit();
+
+            Log.i("LOGS|CHARCREATE", " id in preference: " + id);
+            dspEditor.putLong("id", id);
+            dspEditor.apply();
+
+            //Redirect to GameActivity
+            Intent i = new Intent();
+            i.setClass(getBaseContext(), Splash.class);
+            startActivity(i);
+            finish();
+        }
+
+        else {
+            Log.i("LOGS|CHARCREATE", "ID OF KNIGHT NOT FOUND: " + id);
+        }
     }
 
 

@@ -13,6 +13,8 @@ import com.example.alexagnoii.sleepingknights.Knight.Item;
 import com.example.alexagnoii.sleepingknights.Knight.Knight;
 import com.example.alexagnoii.sleepingknights.Knight.Weapon;
 
+import java.util.ArrayList;
+
 /**
  * Created by Alex Agno II on 11/13/2017.
  */
@@ -57,7 +59,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Item.COLUMN_DESCRIPTION + " TEXT,"
                 + Item.COLUMN_TYPE + " INTEGER,"
                 + Item.COLUMN_BOOST + " INTEGER,"
-                + Item.COLUMN_COST + " INTEGER"
+                + Item.COLUMN_COST + " INTEGER, "
+                + Item.COLUMN_SKIN + " INTEGER"
                 + ");";
 
         inventoryTable = "CREATE TABLE inventory ("
@@ -70,7 +73,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(inventoryTable);
 
 
-        //Generate items that are inside teh system.
+        //Generate items that are inside the system.
+
+    }
+
+    private void generateItems() {
+        ArrayList<Item> itemList = new ArrayList<Item>();
+        //These are the default weapons, must always be ID 1, 2, 3
+        Weapon defaultWeapon = new Weapon(/*Name*/ /*Desc*/ /*Atk*/ /*Cost*/ /*SkinId*/);
+        Armor defaultArmor = new Armor(/*Name*/ /*Desc*/ /*Def*/ /*Cost*/ /*SkinId*/),
+                defaultShield = new Armor(/*Name*/ /*Desc*/ /*Def*/ /*Cost*/ /*SkinId*/);
+
+        //These are the rest of the items
+        /****coming soon*****/
+
+
+        itemList.add(defaultArmor);
+        itemList.add(defaultWeapon);
+        itemList.add(defaultShield);
+        //Add to DB.
+
+        for (int i = 0; i < itemList.size(); i++) {
+            if(itemList.get(i) instanceof Armor) {
+                
+            }
+            else if (itemList.get(i) instanceof Weapon) {
+
+            }
+
+            else {
+                Log.i("LOGS|DATABASEHELPER", "Fail to identify item type.");
+            }
+
+        }
+
+
     }
 
     @Override
