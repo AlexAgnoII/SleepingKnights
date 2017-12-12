@@ -6,8 +6,11 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.DialogFragment;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.alexagnoii.sleepingknights.DialogFragments.HelpFragment;
 import com.example.alexagnoii.sleepingknights.DialogFragments.SettingsFragment;
+import com.example.alexagnoii.sleepingknights.Knight.Knight;
 
 public class GameActivity extends AppCompatActivity {
     FragmentManager fm;
@@ -23,11 +27,21 @@ public class GameActivity extends AppCompatActivity {
     SettingsFragment sf;
     RelativeLayout bg;
     Button btnSettings, btnHelp, btnMarket, btnInventory;
+    DatabaseHelper dbh;
+    Knight knight;
+    SharedPreferences dsp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        dbh = new DatabaseHelper(getBaseContext());
+        //Get id from sharedpreference;
+        dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        long userID = dsp.getLong("id", -1);
+        updateStats(userID);
+
 
         btnSettings = (Button)findViewById(R.id.btn_settings);
         btnHelp = (Button)findViewById(R.id.btn_help);
@@ -75,6 +89,25 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+    }
+
+
+    private void updateStats(long userID) {
+        if(userID != -1) {
+            Log.i("LOGS|GAMEACTIVITY", "User found = " + userID);
+            Log.i("LOGS|GAMEACTIVITY", "User name: " + dsp.getString("name", null));
+            Log.i("LOGS|GAMEACTIVITY", "Health: " + dsp.getInt("hp", -1));
+            Log.i("LOGS|GAMEACTIVITY", "Attack: " + dsp.getInt("attack", -1));
+            Log.i("LOGS|GAMEACTIVITY", "Defense: " + dsp.getInt("defense", -1));
+
+        }
+
+        else {
+            Log.i("LOGS|GAMEACTIVITY", "No id for some reason wtf la?");
+        }
 
 
     }

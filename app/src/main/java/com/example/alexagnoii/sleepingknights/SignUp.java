@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.alexagnoii.sleepingknights.Knight.Knight;
 
@@ -48,18 +49,30 @@ public class SignUp extends AppCompatActivity {
             public void onClick(View view) {
                 //Initialize user
                 String userName = etUsername.getText().toString();
-                Log.i("LOGS|SIGNUP ACTIVITY", "username entered-> " + userName);
 
-                //Proceed to character creation (Send name as intent)
-                Intent i = new Intent();
-                i.putExtra("username", userName);
-                i.setClass(getBaseContext(), CharCreationActivity.class);
-                startActivity(i);
-                finish(); //finish this activity.
+                //If username is empty OR only spaces, DO THIS
+                if(nameChecker(userName)) {
+                    Toast.makeText(getBaseContext(), "Please enter a valid username!", Toast.LENGTH_SHORT).show();
+                }
+
+                else {
+
+                    //If its valid, do this!
+                    Log.i("LOGS|SIGNUP ACTIVITY", "username entered-> " + userName);
+
+                    //Proceed to character creation (Send name as intent)
+                    Intent i = new Intent();
+                    i.putExtra("username", userName);
+                    i.setClass(getBaseContext(), CharCreationActivity.class);
+                    startActivity(i);
+                    finish(); //finish this activity.
+                }
 
             }
         });
+    }
 
-
+    private boolean nameChecker(String value) {
+        return value.matches("^\\s+$") || value.length() == 0;
     }
 }

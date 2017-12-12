@@ -54,6 +54,8 @@ public class CharCreationActivity extends AppCompatActivity{
         AnimationDrawable frAnim1 = (AnimationDrawable) bg.getBackground();
         frAnim1.start();
 
+        dbHelper = new DatabaseHelper(getBaseContext());
+
         btnCCproceed = (Button)findViewById(R.id.btn_CCproceed);
 
         tvHP = (TextView)findViewById(R.id.tv_HP);
@@ -219,31 +221,18 @@ public class CharCreationActivity extends AppCompatActivity{
             }
         });
 
-        dbHelper = new DatabaseHelper(getBaseContext());
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Save knight to db + save the ID on shared preference.
                 if(parseStringToInt(lblPts.getText()) == 0) {
-                    Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
-                            parseStringToInt(tvATK.getText()),
-                            parseStringToInt(tvDEF.getText()));
-                    dbHelper.addKnight(k);
-                    String id = dbHelper.getKnightID()+"";
-
-                    SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                    SharedPreferences.Editor dspEditor = dsp.edit();
-
-                    Log.i("LOGS|CHARCREATE", " id in preference: " + id);
-                    dspEditor.putString("id", id);
-                    dspEditor.apply();
-
+                    addUser();
                     //Redirect to GameActivity
                     Intent i = new Intent();
                     i.setClass(getBaseContext(), Splash.class);
                     startActivity(i);
                     finish();
                 }
+
                 else {
                     Toast.makeText(getBaseContext(), "Please don't waste your points!", Toast.LENGTH_SHORT).show();
                 }
@@ -251,6 +240,44 @@ public class CharCreationActivity extends AppCompatActivity{
         });
 
 
+
+    }
+
+    private void addUser() {
+        Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
+                                        parseStringToInt(tvATK.getText()),
+                                        parseStringToInt(tvDEF.getText()));
+        k.setId(1); //set id
+        SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor dspEditor = dsp.edit();
+
+
+        dspEditor.putLong("id", k.getId());
+        dspEditor.putString("name", k.getName());
+        dspEditor.putInt("hp", k.getHealthPoints());
+        dspEditor.putInt("currentHp", k.getCurrentHP());
+        dspEditor.putInt("attack", k.getAttack());
+        dspEditor.putInt("defense", k.getDefense());
+        dspEditor.putLong("level", k.getLevel());
+        dspEditor.putLong("exp", k.getExp());
+        dspEditor.putLong("gold", k.getGold());
+
+        //Initialize armor, weapon, shield here
+        //amror
+        //shield
+        //weapon
+
+        dspEditor.apply();
+
+        Log.i("LOGS|CHARCREATE", "ID:" + dsp.getLong("id", -1));
+        Log.i("LOGS|CHARCREATE", "name:" + dsp.getString("name", null));
+        Log.i("LOGS|CHARCREATE", "hp:" + dsp.getInt("hp", -1));
+        Log.i("LOGS|CHARCREATE", "currentHp:" + dsp.getInt("currentHp", -1));
+        Log.i("LOGS|CHARCREATE", "attack:" + dsp.getInt("attack", -1));
+        Log.i("LOGS|CHARCREATE", "defense:" + dsp.getInt("defense", -1));
+        Log.i("LOGS|CHARCREATE", "level:" + dsp.getLong("level", -1));
+        Log.i("LOGS|CHARCREATE", "exp:" + dsp.getLong("exp", -1));
+        Log.i("LOGS|CHARCREATE", "gold:" + dsp.getLong("gold", -1));
 
     }
 

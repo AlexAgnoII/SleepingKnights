@@ -12,11 +12,24 @@ public class Item {
     public static final String COLUMN_BOOST = "boost"; //attk for weapon, def for armor, hp for potions.
     public static final String COLUMN_TYPE = "type";//type of item
     public static final String COLUMN_COST = "cost";//type of item
+    public static final String COLUMN_SKIN = "skin_id";
 
     protected long id;
     protected String name;
     protected String description;
     protected int cost;
+    protected int skinId;
+
+    public Item() {}
+
+    public Item(long id, String name, String description, int cost, int skinId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.skinId = skinId;
+    }
+
 
     public Item(long id, String name, String description, int cost) {
         this.id = id;

@@ -48,11 +48,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-                String userID = dsp.getString("id", null);
+                long userID = dsp.getLong("id", -1);
                 Intent i = new Intent();
 
+
                 //CHECK IF SHAREDPREFERENCE HAS A PLAYER
-                if(userID == null) {
+                if(userID == -1) {
                     //if doesnt have, go to char creation
                     Log.i("LOGS|MAINACTIVITY", "no user found from preference");
                     i.setClass(getBaseContext(), SignUp.class);
