@@ -1,46 +1,41 @@
-package com.example.alexagnoii.sleepingknights.DialogFragments;
+package com.example.alexagnoii.sleepingknights;
 
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.alexagnoii.sleepingknights.Help.HelpAdapter;
 import com.example.alexagnoii.sleepingknights.Help.HelpItems;
-import com.example.alexagnoii.sleepingknights.R;
 
 import java.util.ArrayList;
 
 /**
- * Created by Claude on 2017-11-14.
+ * Created by jessganoww on 12/5/17.
  */
 
-public class HelpFragment extends Dialog {
+public class HelpDialog extends Dialog {
 
     ArrayList<HelpItems> helpList = new ArrayList<>();
     RecyclerView rvHelp;
     HelpAdapter ha;
 
-    public HelpFragment(@NonNull Context context) {
+    public HelpDialog(@NonNull Context context) {
         super(context);
     }
 
-    @Nullable
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.activity_help, container);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_help);
 
         helpList.add(new HelpItems("Knight", "This is your character. Your goal is to defeat as many" +
                 " monsters as you can in this nightmare", R.drawable.w6));
         helpList.add(new HelpItems("Inventory","This is your inventory. You can store a maximum of " +
-                "10 items here", R.drawable.ic_inventory));
+                "10 items here", R.drawable.ic_help));
         helpList.add(new HelpItems("Market","The market is where you can buy items to aid you " +
                 "in your adventure", R.drawable.ic_market));
         helpList.add(new HelpItems("Field","In this game, you must navigate from room to room," +
@@ -52,11 +47,10 @@ public class HelpFragment extends Dialog {
         helpList.add(new HelpItems("Weapons", "Weapons increase your attack points", R.drawable.sword1));
         helpList.add(new HelpItems("Armor and shield", "Armors and shields increase your defense points", R.drawable.armour));
 
-        rvHelp = (RecyclerView) rootView.findViewById(R.id.rv_helpItems);
-     //   rvHelp.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-      //  ha  = new HelpAdapter(this.getActivity(), helpList);
+        rvHelp = (RecyclerView) findViewById(R.id.rv_helpItems);
+        rvHelp.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        ha  = new HelpAdapter(getContext(), helpList);
         rvHelp.setAdapter(ha);
-
-        return rootView;
     }
+
 }

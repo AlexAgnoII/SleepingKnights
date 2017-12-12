@@ -1,14 +1,21 @@
 package com.example.alexagnoii.sleepingknights;
 
+import android.app.Dialog;
 import android.app.FragmentManager;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.alexagnoii.sleepingknights.DialogFragments.HelpFragment;
 import com.example.alexagnoii.sleepingknights.DialogFragments.SettingsFragment;
@@ -42,7 +49,7 @@ public class GameActivity extends AppCompatActivity {
         btnInventory = (Button)findViewById(R.id.btn_inventory);
 
         fm = getFragmentManager();
-        hf = new HelpFragment();
+      //  hf = new HelpFragment();
         sf = new SettingsFragment();
 
         btnInventory.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +69,10 @@ public class GameActivity extends AppCompatActivity {
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hf.show(fm, "help");
+                HelpDialog hd = new HelpDialog(GameActivity.this);
+                hd.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                hd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                hd.show();
 
 
             }
@@ -70,8 +80,12 @@ public class GameActivity extends AppCompatActivity {
         btnMarket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDialog sd = new SimpleDialog(R.layout.market);
-                sd.show(getSupportFragmentManager(), "");
+                MarketDialog md = new MarketDialog(GameActivity.this);
+                md.requestWindowFeature(Window.FEATURE_NO_TITLE);
+              //  md.setContentView(R.layout.market);
+                md.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+              //  ((TextView)dialog.findViewById(R.id.lblmarket)).setTypeface(Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf"));
+                md.show();
 
             }
         });

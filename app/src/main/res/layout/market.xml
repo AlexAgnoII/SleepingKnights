@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
-
-    <Button
-        android:id="@+id/btn_market"
-        android:layout_width="30dp"
-        android:layout_height="28dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/exit"
-        android:layout_alignParentRight="true"
-        />
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:text="Inventory"
+        android:layout_gravity="center_horizontal"
+        android:text="Market"
+        android:id="@+id/lblmarket"
         android:textSize="18dp"
         android:textColor="#ffffff"/>
 
@@ -77,7 +68,6 @@
         android:textSize="10dp"
         android:textStyle="italic"
         android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/panelinventory"/>
+        android:layout_gravity="center_horizontal"/>
 
-</RelativeLayout>
+</LinearLayout>

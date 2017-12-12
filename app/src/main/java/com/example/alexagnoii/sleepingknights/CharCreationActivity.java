@@ -28,7 +28,8 @@ public class CharCreationActivity extends AppCompatActivity{
     private DatabaseHelper dbHelper;
     private Button btnCCproceed;
     private RelativeLayout bg;
-    private TextView tvHP, lblHP, tvATK, lblATK, tvDEF, lblDEF, lblMsg, lblPts,
+    private TextView tvHP, lblHP, tvATK, lblATK,
+                     tvDEF, lblDEF, lblMsg, lblPts,
                      tvHPUP, tvHPDOWN,
                      tvATKUP, tvATKDOWN,
                      tvDEFUP, tvDEFDOWN;
