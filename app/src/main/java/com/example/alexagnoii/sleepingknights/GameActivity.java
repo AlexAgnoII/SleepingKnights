@@ -33,7 +33,7 @@ public class GameActivity extends AppCompatActivity {
         //Get id from sharedpreference;
         dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         long userID = dsp.getLong("id", -1);
-        updateStats(userID);
+        updateMainMenuStats(userID);
 
 
         btnSettings = (Button)findViewById(R.id.btn_settings);
@@ -81,7 +81,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
 
-    private void updateStats(long userID) {
+    private void updateMainMenuStats(long userID) {
         if(userID != -1) {
             Log.i("LOGS|GAMEACTIVITY", "User found = " + userID);
             Log.i("LOGS|GAMEACTIVITY", "User name: " + dsp.getString("name", null));
