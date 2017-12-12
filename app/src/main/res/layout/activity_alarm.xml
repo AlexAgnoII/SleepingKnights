@@ -7,11 +7,27 @@ android:layout_height="match_parent">
         android:id="@+id/timePicker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
     </TimePicker>
-    <Button
-        android:id="@+id/btn_saveTime"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_enable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn alarm on" />
+        <Button
+            android:id="@+id/btn_disable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Turn alarm off" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_alarmStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alarm Disabled"/>
 </LinearLayout>

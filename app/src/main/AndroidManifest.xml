@@ -19,22 +19,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SignUp"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".CharCreationActivity"
             android:screenOrientation="landscape" />
-
         <activity android:name=".GameActivity"
-                  android:screenOrientation="landscape" ></activity>
-
+                  android:screenOrientation="landscape" >
+        </activity>
         <activity android:name=".Splash"
-            android:screenOrientation="landscape" ></activity>
+            android:screenOrientation="landscape" >
+        </activity>
         <activity android:name=".Alarm"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
+        <receiver android:name = ".Knight.AlarmReceiver"/>
+        <service android:name=".RingtonePlayingService"/>
     </application>
-
 </manifest>
