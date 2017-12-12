@@ -223,9 +223,13 @@ public class CharCreationActivity extends AppCompatActivity{
         btnCCproceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Save knight to db + save the ID on shared preference.
                 if(parseStringToInt(lblPts.getText()) == 0) {
                     addUser();
+                    //Redirect to GameActivity
+                    Intent i = new Intent();
+                    i.setClass(getBaseContext(), Splash.class);
+                    startActivity(i);
+                    finish();
                 }
 
                 else {
@@ -240,29 +244,40 @@ public class CharCreationActivity extends AppCompatActivity{
 
     private void addUser() {
         Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
-                parseStringToInt(tvATK.getText()),
-                parseStringToInt(tvDEF.getText()));
-        dbHelper.addKnight(k);
-        long id = dbHelper.getKnightID();
+                                        parseStringToInt(tvATK.getText()),
+                                        parseStringToInt(tvDEF.getText()));
+        k.setId(1); //set id
+        SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SharedPreferences.Editor dspEditor = dsp.edit();
 
-        if(id != -1) {
-            SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-            SharedPreferences.Editor dspEditor = dsp.edit();
 
-            Log.i("LOGS|CHARCREATE", " id in preference: " + id);
-            dspEditor.putLong("id", id);
-            dspEditor.apply();
+        dspEditor.putLong("id", k.getId());
+        dspEditor.putString("name", k.getName());
+        dspEditor.putInt("hp", k.getHealthPoints());
+        dspEditor.putInt("currentHp", k.getCurrentHP());
+        dspEditor.putInt("attack", k.getAttack());
+        dspEditor.putInt("defense", k.getDefense());
+        dspEditor.putLong("level", k.getLevel());
+        dspEditor.putLong("exp", k.getExp());
+        dspEditor.putLong("gold", k.getGold());
 
-            //Redirect to GameActivity
-            Intent i = new Intent();
-            i.setClass(getBaseContext(), Splash.class);
-            startActivity(i);
-            finish();
-        }
+        //Initialize armor, weapon, shield here
+        //amror
+        //shield
+        //weapon
 
-        else {
-            Log.i("LOGS|CHARCREATE", "ID OF KNIGHT NOT FOUND: " + id);
-        }
+        dspEditor.apply();
+
+        Log.i("LOGS|CHARCREATE", "ID:" + dsp.getLong("id", -1));
+        Log.i("LOGS|CHARCREATE", "name:" + dsp.getString("name", null));
+        Log.i("LOGS|CHARCREATE", "hp:" + dsp.getInt("hp", -1));
+        Log.i("LOGS|CHARCREATE", "currentHp:" + dsp.getInt("currentHp", -1));
+        Log.i("LOGS|CHARCREATE", "attack:" + dsp.getInt("attack", -1));
+        Log.i("LOGS|CHARCREATE", "defense:" + dsp.getInt("defense", -1));
+        Log.i("LOGS|CHARCREATE", "level:" + dsp.getLong("level", -1));
+        Log.i("LOGS|CHARCREATE", "exp:" + dsp.getLong("exp", -1));
+        Log.i("LOGS|CHARCREATE", "gold:" + dsp.getLong("gold", -1));
+
     }
 
 

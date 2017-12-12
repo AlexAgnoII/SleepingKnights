@@ -3,7 +3,6 @@ package com.example.alexagnoii.sleepingknights;
 import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +21,8 @@ public class GameActivity extends AppCompatActivity {
     RelativeLayout bg;
     Button btnSettings, btnHelp, btnMarket, btnInventory;
     DatabaseHelper dbh;
-    Knight k;
+    Knight knight;
+    SharedPreferences dsp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,9 @@ public class GameActivity extends AppCompatActivity {
 
         dbh = new DatabaseHelper(getBaseContext());
         //Get id from sharedpreference;
-        SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         long userID = dsp.getLong("id", -1);
+        updateStats(userID);
 
 
         btnSettings = (Button)findViewById(R.id.btn_settings);
@@ -76,25 +77,23 @@ public class GameActivity extends AppCompatActivity {
         });
 
 
+
+    }
+
+
+    private void updateStats(long userID) {
         if(userID != -1) {
             Log.i("LOGS|GAMEACTIVITY", "User found = " + userID);
-            k = dbh.getKnight(userID);
-
-            if(k != null) {
-                Log.i("LOGS|GAMEACTIVITY", "User name: " + k.getName());
-                Log.i("LOGS|GAMEACTIVITY", "Health: " + k.getCurrentHP());
-                Log.i("LOGS|GAMEACTIVITY", "Attack: " + k.getAttack());
-                Log.i("LOGS|GAMEACTIVITY", "Defense: " + k.getDefense());
-            }
-
-
+            Log.i("LOGS|GAMEACTIVITY", "User name: " + dsp.getString("name", null));
+            Log.i("LOGS|GAMEACTIVITY", "Health: " + dsp.getInt("hp", -1));
+            Log.i("LOGS|GAMEACTIVITY", "Attack: " + dsp.getInt("attack", -1));
+            Log.i("LOGS|GAMEACTIVITY", "Defense: " + dsp.getInt("defense", -1));
 
         }
 
         else {
             Log.i("LOGS|GAMEACTIVITY", "No id for some reason wtf la?");
         }
-
 
 
     }

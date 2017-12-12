@@ -38,20 +38,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String inventoryTable;
         Log.i("LOGS|databaseHelper", "onCreate");
 
-        knightTable = "CREATE TABLE " + Knight.TABLE_NAME + " ("
-                + Knight.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + Knight.COLUMN_NAME + " TEXT,"
-                + Knight.COLUMN_ATTACK + " INTEGER,"
-                + Knight.COLUMN_DEFENSE + " INTEGER,"
-                + Knight.COLUMN_HP + " INTEGER,"
-                + Knight.COLUMN_CHP + " INTEGER,"
-                + Knight.COLUMN_LEVEL + " INTEGER,"
-                + Knight.COLUMN_EXP + " INTEGER,"
-                + Knight.COLUMN_GOLD + " INTEGER,"
-                + Knight.COLUMN_WEAPON + " INTEGER,"
-                + Knight.COLUMN_ARMOR + " INTEGER,"
-                + Knight.COLUMN_SHIELD + " INTEGER"
-                + ");";
+//        knightTable = "CREATE TABLE " + Knight.TABLE_NAME + " ("
+//                + Knight.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+//                + Knight.COLUMN_NAME + " TEXT,"
+//                + Knight.COLUMN_ATTACK + " INTEGER,"
+//                + Knight.COLUMN_DEFENSE + " INTEGER,"
+//                + Knight.COLUMN_HP + " INTEGER,"
+//                + Knight.COLUMN_CHP + " INTEGER,"
+//                + Knight.COLUMN_LEVEL + " INTEGER,"
+//                + Knight.COLUMN_EXP + " INTEGER,"
+//                + Knight.COLUMN_GOLD + " INTEGER,"
+//                + Knight.COLUMN_WEAPON + " INTEGER,"
+//                + Knight.COLUMN_ARMOR + " INTEGER,"
+//                + Knight.COLUMN_SHIELD + " INTEGER"
+//                + ");";
 
         itemTable = "CREATE TABLE " + Item.TABLE_NAME + " ("
                 + Item.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -68,7 +68,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "item_id INTEGER"
                 + ");";
 
-        sqLiteDatabase.execSQL(knightTable);
+
+        //sqLiteDatabase.execSQL(knightTable); /*Convert this table to enemy table*/
+
         sqLiteDatabase.execSQL(itemTable);
         sqLiteDatabase.execSQL(inventoryTable);
 
@@ -113,84 +115,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         Log.i("databaseHelper", "update");
-        String dropKnight = "DROP TABLE IF EXISTS " + Knight.TABLE_NAME+ ";";
+        //String dropKnight = "DROP TABLE IF EXISTS " + Knight.TABLE_NAME+ ";";
         String dropItem = "DROP TABLE IF EXISTS " + Item.TABLE_NAME + ";";
         String dropInvent = "DROP TABLE IF EXISTS inventory;";
-        sqLiteDatabase.execSQL(dropKnight);
+        //sqLiteDatabase.execSQL(dropKnight);
         sqLiteDatabase.execSQL(dropItem);
         sqLiteDatabase.execSQL(dropInvent);
         onCreate(sqLiteDatabase);
     }
 
-    public long addKnight(Knight knight){
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Knight.COLUMN_NAME, knight.getName());
-        contentValues.put(Knight.COLUMN_HP, knight.getHealthPoints());
-        contentValues.put(Knight.COLUMN_CHP, knight.getCurrentHP());
-        contentValues.put(Knight.COLUMN_ATTACK, knight.getAttack());
-        contentValues.put(Knight.COLUMN_DEFENSE, knight.getDefense());
-        contentValues.put(Knight.COLUMN_LEVEL, knight.getLevel());
-        contentValues.put(Knight.COLUMN_EXP, knight.getExp());
-        contentValues.put(Knight.COLUMN_GOLD, knight.getGold());
-        contentValues.put(Knight.COLUMN_WEAPON, knight.getWeapon().getId());
-        contentValues.put(Knight.COLUMN_ARMOR, knight.getArmor().getId());
-        contentValues.put(Knight.COLUMN_SHIELD, knight.getShield().getId());
-
-        long id = db.insert(Knight.TABLE_NAME, null, contentValues);
-        db.close();
-        return id;
-    }
-
-    public boolean updateKnight(Knight updatedKnight, int id){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Knight.COLUMN_NAME, updatedKnight.getName());
-        contentValues.put(Knight.COLUMN_HP, updatedKnight.getHealthPoints());
-        contentValues.put(Knight.COLUMN_CHP, updatedKnight.getCurrentHP());
-        contentValues.put(Knight.COLUMN_ATTACK, updatedKnight.getAttack());
-        contentValues.put(Knight.COLUMN_DEFENSE, updatedKnight.getDefense());
-        contentValues.put(Knight.COLUMN_LEVEL, updatedKnight.getLevel());
-        contentValues.put(Knight.COLUMN_EXP, updatedKnight.getExp());
-        contentValues.put(Knight.COLUMN_GOLD, updatedKnight.getGold());
-        contentValues.put(Knight.COLUMN_WEAPON, updatedKnight.getWeapon().getId());
-        contentValues.put(Knight.COLUMN_ARMOR, updatedKnight.getArmor().getId());
-        contentValues.put(Knight.COLUMN_SHIELD, updatedKnight.getShield().getId());
-
-        db.update(Knight.TABLE_NAME, contentValues, Knight.COLUMN_ID + "=?", new String[]{updatedKnight.getId() + ""});
-        return true;
-    }
-
-    public Knight getKnight(long id){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.query(Knight.TABLE_NAME,
-                null,
-                Knight.COLUMN_ID + "= ?",
-                new String[]{id + ""},
-                null,
-                null,
-                null);
-        Knight k = null;
-        if(c.moveToFirst()) {
-            k = new Knight();
-            k.setName(c.getString(c.getColumnIndex(Knight.COLUMN_NAME)));
-            k.setAttack(c.getInt(c.getColumnIndex(Knight.COLUMN_ATTACK)));
-            k.setDefense(c.getInt(c.getColumnIndex(Knight.COLUMN_DEFENSE)));
-            k.setHealthPoints(c.getInt(c.getColumnIndex(Knight.COLUMN_HP)));
-            k.setGold(c.getLong(c.getColumnIndex(Knight.COLUMN_GOLD)));
-            k.setLevel(c.getLong(c.getColumnIndex(Knight.COLUMN_LEVEL)));
-            k.setExp(c.getLong(c.getColumnIndex(Knight.COLUMN_EXP)));
-            k.setCurrentHP(c.getInt(c.getColumnIndex(Knight.COLUMN_CHP)));
-//            k.setArmor(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_ARMOR))));
-//            k.setWeapon(getWeapon(c.getLong(c.getColumnIndex(Knight.COLUMN_WEAPON))));
-//            k.setShield(getArmor(c.getLong(c.getColumnIndex(Knight.COLUMN_SHIELD))));
-            k.setId(id);
-        }
-        c.close();
-        db.close();
-        return k;
-    }
 
     public boolean deleteKnight (long id){
 
@@ -314,21 +247,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Weapon.COLUMN_ID +  "= ?",
                 new String[]{id + ""});
         return rowsAffected > 0;
-    }
-
-    public void deleteAll() {
-        SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + Knight.TABLE_NAME);
-    }
-
-    public long getKnightID() {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.query(Knight.TABLE_NAME, null, null, null, null, null, null);
-        long id = -1;
-
-        if(c.moveToFirst()) {
-            id = c.getLong(c.getColumnIndex(Knight.COLUMN_ID));
-        }
-        return id;
     }
 }
