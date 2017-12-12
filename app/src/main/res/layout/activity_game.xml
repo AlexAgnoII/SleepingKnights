@@ -13,35 +13,34 @@
 
         <Button
             android:id="@+id/btn_market"
-            android:layout_width="30dp"
-            android:layout_height="28dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_margin="5dp"
-            android:background="@drawable/market"/>
+            android:background="@drawable/ic_market" />
 
         <Button
             android:id="@+id/btn_inventory"
-            android:layout_width="30dp"
-            android:layout_height="28dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_margin="5dp"
             android:layout_toRightOf="@id/btn_market"
-            android:background="@drawable/inv" />
+            android:background="@drawable/ic_inventory" />
 
         <Button
             android:id="@+id/btn_settings"
-            android:layout_width="30dp"
-            android:layout_height="28dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_margin="5dp"
             android:layout_toLeftOf="@+id/btn_help"
-            android:background="@drawable/settings"
-            />
+            android:background="@drawable/ic_settings" />
 
         <Button
             android:id="@+id/btn_help"
-            android:layout_width="30dp"
-            android:layout_height="28dp"
-            android:layout_margin="5dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/help"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/ic_help" />
 
     </RelativeLayout>
 
