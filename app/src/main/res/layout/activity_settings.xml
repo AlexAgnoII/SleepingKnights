@@ -16,16 +16,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Switch
-                android:id="@+id/switch_alarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:enabled="true"
-                android:text="Alarm: Disabled"
-                android:textSize="20sp" />
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,19 +26,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
-                    android:text="Alarm Time: 7:00"
+                    android:text="Alarm :"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/btn_editAlarm"
+                <TextView
+                    android:layout_marginLeft="10sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="Edit Alarm"
-                    android:textSize="10dp"/>
+                    android:id="@+id/tv_alarmTime"
+                    android:textColor="#000000"
+                    android:textSize="20sp"/>
             </LinearLayout>
-
+            <Button
+                android:id="@+id/btn_editAlarm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="Configure"
+                android:textSize="10dp"/>
             <Switch
                 android:id="@+id/switch_sound"
                 android:layout_width="wrap_content"
