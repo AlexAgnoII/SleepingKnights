@@ -1,16 +1,19 @@
 package com.example.alexagnoii.sleepingknights;
 
-import android.app.Dialog;
 import android.app.FragmentManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.app.DialogFragment;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -33,10 +36,72 @@ public class GameActivity extends AppCompatActivity {
     Knight knight;
     SharedPreferences dsp;
 
+    TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue;
+
+    SurfaceView gameBoard;
+
+    DrawingThread thread;
+
+    int avatarX = 0;
+    int avatarY = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        gameBoard = (SurfaceView) findViewById(R.id.container);
+
+        lblhp = (TextView)findViewById(R.id.lblhp);
+        hpvalue = (TextView)findViewById(R.id.hpvalue);
+        lblatk = (TextView)findViewById(R.id.lblatk);
+        atkvalue = (TextView)findViewById(R.id.atkvalue);
+        lbldef = (TextView)findViewById(R.id.lbldef);
+        defvlaue = (TextView)findViewById(R.id.defvalue);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
+
+        lblhp.setTypeface(tf);
+        hpvalue.setTypeface(tf);
+        lblatk.setTypeface(tf);
+        atkvalue.setTypeface(tf);
+        lbldef.setTypeface(tf);
+        defvlaue.setTypeface(tf);
+
+        gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                thread = new DrawingThread(gameBoard.getHolder());
+                thread.setRunning(true);
+                thread.start();
+
+                tryDrawing(surfaceHolder);
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+                tryDrawing(surfaceHolder);
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+            }
+
+            private void tryDrawing(SurfaceHolder holder) {
+                Log.i("", "Trying to draw...");
+
+                Canvas canvas = holder.lockCanvas();
+                if (canvas == null) {
+                    Log.e("", "Cannot draw onto the canvas as it's null");
+                } else {
+                    draw(canvas);
+                    holder.unlockCanvasAndPost(canvas);
+                }
+            }
+
+
+        });
 
         dbh = new DatabaseHelper(getBaseContext());
         //Get id from sharedpreference;
@@ -91,9 +156,70 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void draw(Canvas canvas) {
+        // draw all assets
+        Log.i("", "Drawing...");
 
+        if(canvas!=null) {
+            // clear the board
+            canvas.drawRGB(255, 255, 255);
 
+            // ... or draw a bitmap
+            Bitmap board = BitmapFactory.decodeResource(getResources(),R.drawable.breal);
+            Bitmap monster = BitmapFactory.decodeResource(getResources(), R.drawable.monster);
+
+            // the -(android.getWidth()/2) is just so that we can center the icon to the avatar's center
+            //  canvas.drawBitmap(board, avatarX-(android.getWidth()/2), avatarY-, null);
+            canvas.drawBitmap(board, 0, 0, null);
+            canvas.drawBitmap(monster, (monster.getWidth()/2), (monster.getHeight()/2), null);
+
+        }
+    }
+
+    class DrawingThread extends Thread {
+        private SurfaceHolder _surfaceHolder;
+
+        private boolean running = false;
+
+        public DrawingThread(SurfaceHolder surfaceHolder) {
+            _surfaceHolder = surfaceHolder;
+        }
+
+        public void setRunning(boolean run) {
+            running = run;
+        }
+
+        @Override
+        public void run() {
+            Canvas c;
+            while (running && !Thread.interrupted()) {
+                c = null;
+                try {
+                    c = _surfaceHolder.lockCanvas(null);
+                    synchronized (_surfaceHolder) {
+                        //call a method that draws all the required objects onto the canvas.
+                        draw(c);
+                    }
+                } finally {
+                    // do this in a finally so that if an exception is thrown
+                    // during the above, we don't leave the Surface in an
+                    // inconsistent state
+                    if (c != null) {
+                        _surfaceHolder.unlockCanvasAndPost(c);
+                    }
+                }
+                //sleep for a short period of time.
+                if (!running) return;  //don't sleep, just exit if we are done.
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
     }
 
 
@@ -110,7 +236,5 @@ public class GameActivity extends AppCompatActivity {
         else {
             Log.i("LOGS|GAMEACTIVITY", "No id for some reason wtf la?");
         }
-
-
     }
 }

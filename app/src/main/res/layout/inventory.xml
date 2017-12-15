@@ -1,47 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/transparent">
+    android:id="@+id/panelhelp"
+    android:layout_width="320dp"
+    android:layout_height="280dp"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/panel">
 
-    <Button
-        android:id="@+id/btn_market"
-        android:layout_width="30dp"
-        android:layout_height="28dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/exit"
-        android:layout_alignParentRight="true"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_invItems"
+        android:layout_width="300dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="3dp"
         android:layout_centerHorizontal="true"
-        android:text="Inventory"
-        android:textSize="18dp"
-        android:textColor="#ffffff"/>
-
-    <RelativeLayout
-        android:id="@+id/panelinventory"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/panel"></RelativeLayout>
-
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:background="@drawable/field"
-        android:fontFamily="monospace"
-        android:text="OK"
-        android:textSize="10dp"
-        android:textStyle="italic"
-        android:layout_marginTop="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/panelinventory"/>
+        android:padding="10dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
+

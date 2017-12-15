@@ -34,10 +34,10 @@ public class HelpDialog extends Dialog {
 
         helpList.add(new HelpItems("Knight", "This is your character. Your goal is to defeat as many" +
                 " monsters as you can in this nightmare", R.drawable.w6));
-        helpList.add(new HelpItems("Inventory","This is your inventory. You can store a maximum of " +
-                "10 items here", R.drawable.ic_help));
+      /*  helpList.add(new HelpItems("Inventory","This is your inventory. You can store a maximum of " +
+                "10 items here", R.drawable.ic_inventory));
         helpList.add(new HelpItems("Market","The market is where you can buy items to aid you " +
-                "in your adventure", R.drawable.ic_market));
+                "in your adventure", R.drawable.ic_market)); */
         helpList.add(new HelpItems("Field","In this game, you must navigate from room to room," +
                 " and try to defeat as many monters as possible. Once you leave a room, you can't go back", R.drawable.bgn1));
         helpList.add(new HelpItems("D-pad", "Use the dpad to move your character across the map", R.drawable.ic_help));
