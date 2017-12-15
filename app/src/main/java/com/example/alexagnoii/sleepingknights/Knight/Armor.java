@@ -21,6 +21,11 @@ public class Armor extends Item{
         super(0, null, null, 0);
     }
 
+    public Armor(String name, String description, int def, int cost, int skinId) {
+        super(name, description, cost, skinId);
+        this.defenseIncrease = def;
+    }
+
     public int getDefenseIncrease() {
         return defenseIncrease;
     }

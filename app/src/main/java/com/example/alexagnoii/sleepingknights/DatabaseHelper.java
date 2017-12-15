@@ -21,10 +21,9 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SCHEMA = "game";
-    public static final int VERSION = 2;
+    public static final int VERSION = 1;
 
     public DatabaseHelper(Context context) {
-
         super(context, SCHEMA, null, VERSION);
         Log.i("LOGS|databaseHelper", "Constructor");
         SQLiteDatabase db = this.getWritableDatabase();
@@ -76,39 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         //Generate items that are inside the system.
-
-    }
-
-    private void generateItems() {
-        ArrayList<Item> itemList = new ArrayList<Item>();
-        //These are the default weapons, must always be ID 1, 2, 3
-        Weapon defaultWeapon = new Weapon(/*Name*/ /*Desc*/ /*Atk*/ /*Cost*/ /*SkinId*/);
-        Armor defaultArmor = new Armor(/*Name*/ /*Desc*/ /*Def*/ /*Cost*/ /*SkinId*/),
-                defaultShield = new Armor(/*Name*/ /*Desc*/ /*Def*/ /*Cost*/ /*SkinId*/);
-
-        //These are the rest of the items
-        /****coming soon*****/
-
-
-        itemList.add(defaultArmor);
-        itemList.add(defaultWeapon);
-        itemList.add(defaultShield);
-        //Add to DB.
-
-        for (int i = 0; i < itemList.size(); i++) {
-            if(itemList.get(i) instanceof Armor) {
-                
-            }
-            else if (itemList.get(i) instanceof Weapon) {
-
-            }
-
-            else {
-                Log.i("LOGS|DATABASEHELPER", "Fail to identify item type.");
-            }
-
-        }
-
+        generateItems(sqLiteDatabase);
 
     }
 
@@ -124,14 +91,83 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    private void generateItems(SQLiteDatabase sqLiteDatabase) {
+        ArrayList<Item> itemList = new ArrayList<Item>();
+        //These are the default weapons, must always be ID 1, 2, 3
+        Weapon defaultWeapon = new Weapon(/*Name*/"Blade", /*Desc*/ "a normal blade", /*Atk*/ 1, /*Cost*/ 0, /*SkinId*/1);
+        Armor defaultArmor = new Armor(/*Name*/"Armor", /*Desc*/"a simple armor", /*Def*/1, /*Cost*/0, /*SkinId*/2),
+                defaultShield = new Armor(/*Name*/"Shield", /*Desc*/"a simple shield", /*Def*/1, /*Cost*/0, /*SkinId*/3);
 
-    public boolean deleteKnight (long id){
 
-        SQLiteDatabase db = getWritableDatabase();
-        int rowsAffected = db.delete(Knight.TABLE_NAME,
-                Knight.COLUMN_ID +  "= ?",
-                new String[]{id + ""});
-        return rowsAffected > 0;
+        itemList.add(defaultArmor);
+        itemList.add(defaultWeapon);
+        itemList.add(defaultShield);
+
+        //These are the rest of the items
+        itemList.add(new Weapon("Blade of Wow!", "its so wow!", 2, 10, 4));
+        itemList.add(new Weapon("Blade of WTF?", "idk WTF?", 3, 20, 5));
+        itemList.add(new Weapon("Blade of OMFG!", "OMFG OMFG", 4, 30, 6));
+        itemList.add(new Armor("Armor of Wow!", "such wow armor!", 2, 10, 7));
+        itemList.add(new Armor("Armor of WTF!", "such WTF armor!", 3, 20, 8));
+        itemList.add(new Armor("Armor of OMFG!", "Suc- OMFG OMFG!", 4, 30, 9));
+        itemList.add(new Armor("Shield of Shield", "Shieldception!", 5, 15, 10));
+        itemList.add(new Armor("Shield without Shield!", "Shield using no shield!", 10, 50, 11));
+
+
+        //Add to DB (item)
+        for (int i = 0; i < itemList.size(); i++) {
+            Log.i("LOGS|DATABASEHELPER", itemList.get(i).getName());
+            if(itemList.get(i) instanceof Armor) {
+                //Log.i("LOGS|DATABASEHELPER", itemList.get(i).getName());
+               addArmor((Armor) itemList.get(i), sqLiteDatabase);
+            }
+            else if (itemList.get(i) instanceof Weapon) {
+                addWeapon((Weapon) itemList.get(i), sqLiteDatabase);
+            }
+
+            else {
+                Log.i("LOGS|DATABASEHELPER", "Fail to identify item type.");
+            }
+
+        }
+
+        //Add to DB (Inventory)
+        addToInventory(1, sqLiteDatabase);
+        addToInventory(2, sqLiteDatabase);
+        addToInventory(3, sqLiteDatabase);
+
+
+    }
+
+
+    public long addArmor(Armor armor, SQLiteDatabase db){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Armor.COLUMN_NAME, armor.getName());
+        contentValues.put(Armor.COLUMN_BOOST, armor.getDefenseIncrease());
+        contentValues.put(Armor.COLUMN_DESCRIPTION, armor.getDescription());
+        contentValues.put(Armor.COLUMN_COST, armor.getCost());
+        contentValues.put(Armor.COLUMN_SKIN, armor.getSkinId());
+        contentValues.put(Armor.COLUMN_TYPE, 2);
+
+        long id = db.insert(Armor.TABLE_NAME, null, contentValues);
+        //db.close();
+        Log.i("LOGS", id+"");
+        return id;
+    }
+
+    public long addWeapon(Weapon weapon, SQLiteDatabase db){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
+        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
+        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
+        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
+        contentValues.put(Weapon.COLUMN_SKIN, weapon.getSkinId());
+        contentValues.put(Weapon.COLUMN_TYPE, 1);
+
+        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
+        //db.close();
+        Log.i("LOGS", id+"");
+        return id;
     }
 
     public long addArmor(Armor armor){
@@ -247,5 +283,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Weapon.COLUMN_ID +  "= ?",
                 new String[]{id + ""});
         return rowsAffected > 0;
+    }
+
+    public long addToInventory(long itemId, SQLiteDatabase db) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("item_id", itemId);
+
+        long id = db.insert("inventory", null, contentValues);
+        return id;
+    }
+
+    public long addToInventory(long itemId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("item_id", itemId);
+
+        long id = db.insert("inventory", null, contentValues);
+        db.close();
+        return id;
     }
 }

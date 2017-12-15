@@ -12,6 +12,10 @@ public class Weapon extends Item {
         super(id, name, description, cost);
         this.attackIncrease = attackIncrease;
     }
+    public Weapon(String name, String description, int cost, int attackIncrease, int skinId) {
+        super(name, description, cost, skinId);
+        this.attackIncrease = attackIncrease;
+    }
 
     public Weapon(long id){super(id, null, null, 0);}
 

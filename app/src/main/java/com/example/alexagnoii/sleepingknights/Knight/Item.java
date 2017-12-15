@@ -20,7 +20,12 @@ public class Item {
     protected int cost;
     protected int skinId;
 
-    public Item() {}
+    public Item(String name, String description, int cost, int skinId) {
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.skinId = skinId;
+    }
 
     public Item(long id, String name, String description, int cost, int skinId) {
         this.id = id;
@@ -33,6 +38,12 @@ public class Item {
 
     public Item(long id, String name, String description, int cost) {
         this.id = id;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+    }
+
+    public Item(String name, String description, int cost) {
         this.name = name;
         this.description = description;
         this.cost = cost;
@@ -65,4 +76,12 @@ public class Item {
     public long getId() {return id;}
 
     public void setId(long id) {this.id = id;}
+
+    public int getSkinId() {
+        return skinId;
+    }
+
+    public void setSkinId(int skinId) {
+        this.skinId = skinId;
+    }
 }
