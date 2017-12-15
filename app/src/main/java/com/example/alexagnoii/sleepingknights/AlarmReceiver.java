@@ -46,7 +46,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationManager.notify(notificationID, Builder.build());
 
         Handler h = new Handler();
-        final long delayInMilliseconds = 30000;
+        final long delayInMilliseconds = 60000;
         h.postDelayed(new Runnable() {
             public void run() {
                 notificationManager.cancel(notificationID);

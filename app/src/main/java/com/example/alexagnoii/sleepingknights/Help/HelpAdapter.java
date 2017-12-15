@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alexagnoii.sleepingknights.Inventory.InventoryItem;
 import com.example.alexagnoii.sleepingknights.R;
 
 import java.util.ArrayList;
