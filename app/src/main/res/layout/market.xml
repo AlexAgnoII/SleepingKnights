@@ -36,7 +36,7 @@
                 android:src="@drawable/gold"/>
 
             <TextView
-                android:id="@+id/tv_gold"
+                android:id="@+id/tv_goldBonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

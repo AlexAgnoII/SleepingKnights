@@ -22,6 +22,8 @@ import com.example.alexagnoii.sleepingknights.DialogFragments.SettingsFragment;
 import com.example.alexagnoii.sleepingknights.Knight.Knight;
 
 public class GameActivity extends AppCompatActivity {
+    public static final int NOTIFICATION_ID_PB = 0;
+    public static final int PENDINT_SA = 0;
     FragmentManager fm;
     HelpFragment hf;
     SettingsFragment sf;

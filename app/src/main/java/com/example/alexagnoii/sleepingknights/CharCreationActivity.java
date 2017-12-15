@@ -4,15 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.NumberPicker;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,12 +55,12 @@ public class CharCreationActivity extends AppCompatActivity{
 
         btnCCproceed = (Button)findViewById(R.id.btn_CCproceed);
 
-        tvHP = (TextView)findViewById(R.id.tv_HP);
-        lblHP = (TextView)findViewById(R.id.lbl_HP);
-        tvATK = (TextView)findViewById(R.id.tv_ATK);
-        lblATK = (TextView)findViewById(R.id.lbl_ATK);
-        tvDEF = (TextView)findViewById(R.id.tv_DEF);
-        lblDEF = (TextView)findViewById(R.id.lbl_DEF);
+        tvHP = (TextView)findViewById(R.id.tv_xpCount);
+        lblHP = (TextView)findViewById(R.id.XP);
+        tvATK = (TextView)findViewById(R.id.tv_goldBonus);
+        lblATK = (TextView)findViewById(R.id.lbl_Gold);
+        tvDEF = (TextView)findViewById(R.id.tv_randomStatBonus);
+        lblDEF = (TextView)findViewById(R.id.lbl_randomStat);
 
         lblMsg = (TextView) findViewById(R.id.createMessage);
         lblPts = (TextView) findViewById(R.id.pointsRemaining);

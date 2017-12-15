@@ -9,20 +9,20 @@
     android:id="@+id/mainbg">
 `
     <ImageView
-        android:id="@+id/lblsetstat"
+        android:id="@+id/tv_congratulations"
         android:layout_width="250dp"
         android:layout_height="25dp"
         android:background="@drawable/setstats"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
-        android:layout_marginBottom="15dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/createMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/lblsetstat"
+        android:layout_below="@id/tv_congratulations"
         android:layout_marginBottom="15dp"/>
 
     <TextView
@@ -32,7 +32,7 @@
         android:text="0"
         android:textColor="#ffffff"
         android:textSize="15dp"
-        android:layout_below="@id/lblsetstat"
+        android:layout_below="@id/tv_congratulations"
         android:layout_alignRight="@id/createMessage"
         android:layout_marginBottom="15dp"/>
 
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_below="@id/lblsetstat">
+        android:layout_below="@id/tv_congratulations">
 
         <RelativeLayout
             android:id="@+id/layoutHP"
@@ -50,7 +50,7 @@
             android:layout_margin="40dp">
 
             <TextView
-                android:id="@+id/lbl_HP"
+                android:id="@+id/XP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HP"
@@ -66,18 +66,18 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/lbl_HP"
+                android:layout_below="@id/XP"
                 />
 
             <TextView
-                android:id="@+id/tv_HP"
+                android:id="@+id/tv_xpCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50"
                 android:textSize="55dp"
                 android:textColor="#ffffff"
                 android:layout_toRightOf="@id/btn_HPminus"
-                android:layout_below="@id/lbl_HP"
+                android:layout_below="@id/XP"
                 />
 
             <Button
@@ -88,8 +88,8 @@
                 android:text="+"
                 android:textColor="#ffffff"
                 android:textSize="30dp"
-                android:layout_below="@id/lbl_HP"
-                android:layout_toRightOf="@id/tv_HP"
+                android:layout_below="@id/XP"
+                android:layout_toRightOf="@id/tv_xpCount"
                />
         </RelativeLayout>
 
@@ -101,7 +101,7 @@
             android:layout_margin="40dp">
 
             <TextView
-                android:id="@+id/lbl_ATK"
+                android:id="@+id/lbl_Gold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ATK"
@@ -117,18 +117,18 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/lbl_ATK"
+                android:layout_below="@id/lbl_Gold"
                 />
 
             <TextView
-                android:id="@+id/tv_ATK"
+                android:id="@+id/tv_goldBonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textSize="55dp"
                 android:textColor="#ffffff"
                 android:layout_toRightOf="@id/btn_ATKminus"
-                android:layout_below="@id/lbl_ATK"
+                android:layout_below="@id/lbl_Gold"
                 />
 
             <Button
@@ -139,8 +139,8 @@
                 android:text="+"
                 android:textColor="#ffffff"
                 android:textSize="30dp"
-                android:layout_below="@id/lbl_ATK"
-                android:layout_toRightOf="@id/tv_ATK"
+                android:layout_below="@id/lbl_Gold"
+                android:layout_toRightOf="@id/tv_goldBonus"
                 />
         </RelativeLayout>
 
@@ -152,7 +152,7 @@
             android:layout_margin="50dp">
 
             <TextView
-                android:id="@+id/lbl_DEF"
+                android:id="@+id/lbl_randomStat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DEF"
@@ -168,18 +168,18 @@
                 android:text="-"
                 android:background="@android:color/transparent"
                 android:textColor="#ffffff"
-                android:layout_below="@id/lbl_DEF"
+                android:layout_below="@id/lbl_randomStat"
                 />
 
             <TextView
-                android:id="@+id/tv_DEF"
+                android:id="@+id/tv_randomStatBonus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
                 android:textSize="55dp"
                 android:textColor="#ffffff"
                 android:layout_toRightOf="@id/btn_DEFminus"
-                android:layout_below="@id/lbl_DEF"
+                android:layout_below="@id/lbl_randomStat"
                 />
 
             <Button
@@ -190,8 +190,8 @@
                 android:text="+"
                 android:textColor="#ffffff"
                 android:textSize="30dp"
-                android:layout_below="@id/lbl_DEF"
-                android:layout_toRightOf="@id/tv_DEF"
+                android:layout_below="@id/lbl_randomStat"
+                android:layout_toRightOf="@id/tv_randomStatBonus"
                 />
         </RelativeLayout>
     </LinearLayout>
