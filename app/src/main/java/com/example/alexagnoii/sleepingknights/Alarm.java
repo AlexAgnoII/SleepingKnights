@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.example.alexagnoii.sleepingknights.Knight.AlarmReceiver;
-
 import java.util.Calendar;
 
 public class Alarm extends AppCompatActivity {
@@ -66,12 +64,16 @@ public class Alarm extends AppCompatActivity {
                 if(Build.VERSION.SDK_INT >= 23) {
                     calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
                     calendar.set(Calendar.MINUTE, timePicker.getMinute());
+                    calendar.set(Calendar.SECOND, 0);
+                    calendar.set(Calendar.MILLISECOND, 0);
                     hour = timePicker.getHour();
                     minute = timePicker.getMinute();
                 }
                 else{
                     calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
                     calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+                    calendar.set(Calendar.SECOND, 0);
+                    calendar.set(Calendar.MILLISECOND, 0);
                     minute = timePicker.getCurrentMinute();
                     hour = timePicker.getCurrentHour();
                 }

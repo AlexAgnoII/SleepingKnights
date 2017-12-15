@@ -1,73 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"
-        android:text="Market"
-        android:id="@+id/lblmarket"
-        android:textSize="18dp"
-        android:textColor="#ffffff"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panelhelp"
+    android:layout_width="320dp"
+    android:layout_height="280dp"
+    android:layout_centerInParent="true"
+    android:layout_marginTop="5dp"
+    android:background="@drawable/panel">
 
     <RelativeLayout
-        android:id="@+id/panelinventory"
-        android:layout_width="250dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="5dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/panel">
+        android:id="@+id/gold_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp">
 
-        <RelativeLayout
-            android:id="@+id/gold_layout"
+        <ImageView
+            android:id="@+id/iv_gold"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/gold"/>
+
+        <TextView
+            android:id="@+id/tv_goldBonus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="15dp">
-
-            <ImageView
-                android:id="@+id/iv_gold"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/gold"/>
-
-            <TextView
-                android:id="@+id/tv_gold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/iv_gold"
-                android:text="100"
-                android:textSize="12dp" />
-
-        </RelativeLayout>
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_items"
-            android:layout_marginLeft="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="20dp"
-            android:layout_below="@id/gold_layout">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_gold"
+            android:text="100"
+            android:textSize="12dp" />
 
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:background="@drawable/field"
-        android:fontFamily="monospace"
-        android:text="OK"
-        android:textSize="10dp"
-        android:textStyle="italic"
-        android:layout_marginTop="5dp"
-        android:layout_gravity="center_horizontal"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/gold_layout"
+        android:id="@+id/rv_invItems"
+        android:layout_width="280dp"
+        android:layout_height="220dp"
+        android:layout_centerHorizontal="true"></android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+</RelativeLayout>
+

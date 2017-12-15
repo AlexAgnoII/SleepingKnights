@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
@@ -25,16 +24,22 @@
         <activity
             android:name=".CharCreationActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".GameActivity"
-                  android:screenOrientation="landscape" >
-        </activity>
-        <activity android:name=".Splash"
-            android:screenOrientation="landscape" >
-        </activity>
-        <activity android:name=".Alarm"
-            android:screenOrientation="portrait">
-        </activity>
-        <receiver android:name = ".Knight.AlarmReceiver"/>
-        <service android:name=".RingtonePlayingService"/>
+        <activity
+            android:name=".GameActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Splash"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Alarm"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Bonus"
+            android:screenOrientation="landscape"></activity>
+        <receiver android:name=".AlarmReceiver" />
+
+        <service android:name=".RingtonePlayingService" />
+
+
     </application>
+
 </manifest>
