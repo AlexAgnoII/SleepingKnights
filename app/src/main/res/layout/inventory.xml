@@ -15,20 +15,39 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"></android.support.v7.widget.RecyclerView>
 
-    <Button android:id="@+id/equip"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Equip"
-        android:layout_marginTop="230dp">
-    </Button>
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
 
-    <Button
-        android:id="@+id/unequip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/equip"
-        android:text="Unequip"
-        android:layout_marginTop="230dp"/>
+        <Button
+            android:id="@+id/equip"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:background="@drawable/field"
+            android:fontFamily="monospace"
+            android:text="Equip"
+            android:textSize="10dp"
+            android:textStyle="italic"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentBottom="true" />
 
+        <Button
+            android:id="@+id/unequip"
+            android:layout_width="80dp"
+            android:layout_height="20dp"
+            android:background="@drawable/field"
+            android:fontFamily="monospace"
+            android:text="UNEQUIP"
+            android:textSize="10dp"
+            android:textStyle="italic"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/equip" />
+
+
+    </LinearLayout>
 </RelativeLayout>
 
