@@ -60,7 +60,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         inventoryTable = "CREATE TABLE inventory ("
                 + "_inventory_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "item_id INTEGER"
+                + "item_id INTEGER, "
+                + "item_equip "
                 + ");";
 
 
@@ -158,6 +159,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public long addToInventory(long itemId, SQLiteDatabase db) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("item_id", itemId);
+        contentValues.put("item_equip", 0);
 
         long id = db.insert("inventory", null, contentValues);
         //db.close();

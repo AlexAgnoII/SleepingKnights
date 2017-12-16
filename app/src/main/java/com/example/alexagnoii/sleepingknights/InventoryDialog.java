@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.alexagnoii.sleepingknights.Help.HelpAdapter;
 import com.example.alexagnoii.sleepingknights.Inventory.InventoryAdapter;
@@ -25,7 +26,7 @@ public class InventoryDialog extends Dialog {
     RecyclerView rvInventory;
     InventoryAdapter ia;
     Button btnEquip;
-    long itemIndex;
+    long itemIndex = 0;
     OnClickListener onClickListener;
     public InventoryDialog(@NonNull Context context) { super(context); }
 
@@ -54,7 +55,10 @@ public class InventoryDialog extends Dialog {
         btnEquip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickListener.onItemClick(itemIndex);
+                if(itemIndex != 0)
+                    onClickListener.onItemClick(itemIndex);
+                else
+                    Toast.makeText(getContext(), "Please choose an item to equip!", Toast.LENGTH_SHORT).show();
             }
         });
 

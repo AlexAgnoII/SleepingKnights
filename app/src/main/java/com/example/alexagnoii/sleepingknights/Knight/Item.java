@@ -27,6 +27,7 @@ public class Item {
         this.description = description;
         this.cost = cost;
         this.skinId = skinId;
+        this.boost = boost;
         this.type = type;
     }
 

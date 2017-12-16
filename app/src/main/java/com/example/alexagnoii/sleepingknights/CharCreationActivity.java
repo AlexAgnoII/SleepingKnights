@@ -252,9 +252,9 @@ public class CharCreationActivity extends AppCompatActivity{
         dspEditor.putLong("level", 1);
         dspEditor.putLong("exp", 0);
         dspEditor.putLong("gold", 100);
-        dspEditor.putInt("weapon", 0);
-        dspEditor.putInt("armor", 0);
-        dspEditor.putInt("shield", 0);
+        dspEditor.putLong("weapon", 0);
+        dspEditor.putLong("armor", 0);
+        dspEditor.putLong("shield", 0);
 
         //Initialize armor, weapon, shield here
         //amror
@@ -272,9 +272,9 @@ public class CharCreationActivity extends AppCompatActivity{
         Log.i("LOGS|CHARCREATE", "level:" + dsp.getLong("level", -1));
         Log.i("LOGS|CHARCREATE", "exp:" + dsp.getLong("exp", -1));
         Log.i("LOGS|CHARCREATE", "gold:" + dsp.getLong("gold", -1));
-        Log.i("LOGS|CHARCREATE", "Weapon:" + dsp.getInt("weapon", -1));
-        Log.i("LOGS|CHARCREATE", "Armor:" + dsp.getInt("armor", -1));
-        Log.i("LOGS|CHARCREATE", "Shield:" + dsp.getInt("shield", -1));
+        Log.i("LOGS|CHARCREATE", "Weapon:" + dsp.getLong("weapon", -1));
+        Log.i("LOGS|CHARCREATE", "Armor:" + dsp.getLong("armor", -1));
+        Log.i("LOGS|CHARCREATE", "Shield:" + dsp.getLong("shield", -1));
 
     }
 

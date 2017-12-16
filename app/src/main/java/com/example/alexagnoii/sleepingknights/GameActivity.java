@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     Button btnSettings, btnHelp, btnMarket, btnInventory;
     DatabaseHelper dbh;
     SharedPreferences dsp;
+    int originalValue;
 
     TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue;
 
@@ -48,8 +49,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-        gameBoard = (SurfaceView) findViewById(R.id.container);
+//
+//        gameBoard = (SurfaceView) findViewById(R.id.container);
 
         lblhp = (TextView)findViewById(R.id.lblhp);
         hpvalue = (TextView)findViewById(R.id.hpvalue);
@@ -66,41 +67,41 @@ public class GameActivity extends AppCompatActivity {
         atkvalue.setTypeface(tf);
         lbldef.setTypeface(tf);
         defvlaue.setTypeface(tf);
-
-        gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
-            @Override
-            public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                thread = new DrawingThread(gameBoard.getHolder());
-                thread.setRunning(true);
-                thread.start();
-
-                tryDrawing(surfaceHolder);
-            }
-
-            @Override
-            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-                tryDrawing(surfaceHolder);
-            }
-
-            @Override
-            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
-            }
-
-            private void tryDrawing(SurfaceHolder holder) {
-                Log.i("", "Trying to draw...");
-
-                Canvas canvas = holder.lockCanvas();
-                if (canvas == null) {
-                    Log.e("", "Cannot draw onto the canvas as it's null");
-                } else {
-                    draw(canvas);
-                    holder.unlockCanvasAndPost(canvas);
-                }
-            }
-
-
-        });
+//
+//        gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
+//            @Override
+//            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+//                thread = new DrawingThread(gameBoard.getHolder());
+//                thread.setRunning(true);
+//                thread.start();
+//
+//                tryDrawing(surfaceHolder);
+//            }
+//
+//            @Override
+//            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+//                tryDrawing(surfaceHolder);
+//            }
+//
+//            @Override
+//            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+//
+//            }
+//
+//            private void tryDrawing(SurfaceHolder holder) {
+//                Log.i("", "Trying to draw...");
+//
+//                Canvas canvas = holder.lockCanvas();
+//                if (canvas == null) {
+//                    Log.e("", "Cannot draw onto the canvas as it's null");
+//                } else {
+//                    draw(canvas);
+//                    holder.unlockCanvasAndPost(canvas);
+//                }
+//            }
+//
+//
+//        });
 
         dbh = new DatabaseHelper(getBaseContext());
         //Get id from sharedpreference;
@@ -133,6 +134,8 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(long id) {
                         Log.i("LOGS|GAMEACTIVITY", "Equip: " + (id+""));
+
+                        equiping(id);
                     }
                 });
 
@@ -167,6 +170,90 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void equiping(long id) {
+        Item item = dbh.getItem(id);
+        int type = item.getType();
+
+        SharedPreferences.Editor dspEditor = dsp.edit();
+        Log.i("LOGS|GAMEACTIVITY", "To be worn: " +id+"");
+        //Check if there's currently an equipped item
+        if(type == 1) { //weapon
+            long weaponCheck;
+            weaponCheck = dsp.getLong("weapon", -1);
+            Log.i("LOGS|GAMEACTIVITY", weaponCheck+"");
+            if(weaponCheck == 0) {
+                Log.i("LOGS|GAMEACTIVITY", "Has no equiped");
+                performEquip(item, "weapon");
+                dspEditor.putLong("weapon", id);
+                dspEditor.apply();
+                Log.i("LOGS|GAMEACTIVITY", dsp.getLong("weapon", -1)+"");
+
+            }
+            else {
+                Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+            }
+
+        }
+        else if (type == 2) { //armor
+            long armorCheck;
+            armorCheck = dsp.getLong("armor", -1);
+            Log.i("LOGS|GAMEACTIVITY", armorCheck+"");
+            if(armorCheck == 0) {
+                Log.i("LOGS|GAMEACTIVITY", "Has no equiped");
+                performEquip(item, "armor");
+                dspEditor.putLong("armor", id);
+                dspEditor.apply();
+            }
+            else {
+                Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+            }
+            Log.i("LOGS|GAMEACTIVITY", dsp.getLong("armor", -1)+"");
+
+        }
+
+        else if (type == 3) { //shield
+            long shieldCheck;
+            shieldCheck = dsp.getLong("shield", -1);
+            Log.i("LOGS|GAMEACTIVITY", shieldCheck+"");
+            if(shieldCheck == 0) {
+                Log.i("LOGS|GAMEACTIVITY", "Has no equiped");
+                performEquip(item, "shield");
+                dspEditor.putLong("shield", id);
+                dspEditor.apply();
+                Log.i("LOGS|GAMEACTIVITY", dsp.getLong("shield", -1)+"");
+            }
+            else {
+                Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+            }
+
+        }
+        else {
+            Log.i("LOGS|GAMEACTIVITY", "didnt find wep type.");
+        }
+
+    }
+
+    private void performEquip(Item item, String name) {
+        SharedPreferences.Editor dspEditor = dsp.edit();
+
+        originalValue = 0;
+        //wear
+
+            if(name == "weapon") {
+                originalValue = Integer.parseInt(atkvalue.getText().toString());
+                dspEditor.putInt("attack", originalValue+item.getBoost());
+                dspEditor.apply();
+                atkvalue.setText(originalValue+item.getBoost()+"");
+            }
+            else if(name == "armor" || name == "shield") {
+                originalValue = Integer.parseInt(defvlaue.getText().toString());
+                dspEditor.putInt("defense", originalValue+item.getBoost());
+                dspEditor.apply();
+                defvlaue.setText(originalValue+item.getBoost()+"");
+            }
+
     }
 
     private void draw(Canvas canvas) {
@@ -242,6 +329,7 @@ public class GameActivity extends AppCompatActivity {
             Log.i("LOGS|GAMEACTIVITY", "Attack: " + dsp.getInt("attack", -1));
             Log.i("LOGS|GAMEACTIVITY", "Defense: " + dsp.getInt("defense", -1));
 
+
             hpvalue.setText(dsp.getInt("hp", -1)+"");
             atkvalue.setText(dsp.getInt("attack", -1)+"");
             defvlaue.setText(dsp.getInt("defense", -1)+"");
@@ -253,10 +341,4 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void updateAtk(Long id) {
-        Item item = dbh.getItem(id);
-
-        int prev = Integer.parseInt(atkvalue.getText().toString());
-        atkvalue.setText((prev+item.getBoost())+"");
-    }
 }

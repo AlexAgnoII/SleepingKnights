@@ -36,7 +36,6 @@
             android:textColor="#ffffff"
             android:textSize="15dp"
             android:layout_below="@id/tv_congratulations"
-            android:layout_alignRight="@id/createMessage"
             android:layout_marginBottom="15dp"/>
 
         <LinearLayout
