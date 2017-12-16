@@ -38,7 +38,7 @@ public class GameActivity extends AppCompatActivity {
     int originalValue;
 
     TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue, lblarmor, armorvalue,
-            lblweapon, weaponvalue, lblshield, shieldvalue;
+            lblweapon, weaponvalue, lblshield, shieldvalue, lbllevel, levelvalue, lblxp, xpvalue;
 
     SurfaceView gameBoard;
 
@@ -66,6 +66,10 @@ public class GameActivity extends AppCompatActivity {
         weaponvalue = (TextView)findViewById(R.id.weaponvalue);
         lblshield = (TextView)findViewById(R.id.lblshield);
         shieldvalue = (TextView)findViewById(R.id.shieldvalue);
+        lbllevel = (TextView)findViewById(R.id.lbllevel);
+        levelvalue = (TextView)findViewById(R.id.levelvalue);
+        lblxp = (TextView)findViewById(R.id.lblxp);
+        xpvalue = (TextView)findViewById(R.id.xpvalue);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
 
@@ -75,13 +79,16 @@ public class GameActivity extends AppCompatActivity {
         atkvalue.setTypeface(tf);
         lbldef.setTypeface(tf);
         defvlaue.setTypeface(tf);
-
         lblarmor.setTypeface(tf);
         armorvalue.setTypeface(tf);
         lblshield.setTypeface(tf);
         shieldvalue.setTypeface(tf);
         lblweapon.setTypeface(tf);
         weaponvalue.setTypeface(tf);
+        lbllevel.setTypeface(tf);
+        levelvalue.setTypeface(tf);
+        lblxp.setTypeface(tf);
+        xpvalue.setTypeface(tf);
 
         gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override

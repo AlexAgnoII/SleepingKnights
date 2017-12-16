@@ -209,4 +209,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         return db.query("inventory", null,null,null,null,null,null);
     }
+
+    public Cursor getAllItems() {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query(Item.TABLE_NAME, null, Item.COLUMN_ID + ">?",new String[]{3+"" },null,null,null);
+    }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.alexagnoii.sleepingknights.CursorRecyclerViewAdapter;
 import com.example.alexagnoii.sleepingknights.DatabaseHelper;
 import com.example.alexagnoii.sleepingknights.Knight.Item;
+import com.example.alexagnoii.sleepingknights.Knight.SkinGiver;
 import com.example.alexagnoii.sleepingknights.R;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class InventoryAdapter extends CursorRecyclerViewAdapter<InventoryAdapter
 
         Item item = dbh.getItem(id);
         viewHolder.tv_invItemName.setText(item.getName() + "|" + item.getSkinId());
+        viewHolder.img_invItem.setImageResource(SkinGiver.give(id));
 
         // set the database id to the viewholder's itemView (the "whole row" view)
         viewHolder.itemView.setTag(id);
