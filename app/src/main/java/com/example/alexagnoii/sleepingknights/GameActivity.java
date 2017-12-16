@@ -36,7 +36,8 @@ public class GameActivity extends AppCompatActivity {
     SharedPreferences dsp;
     int originalValue;
 
-    TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue;
+    TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue, lblarmor, armorvalue,
+            lblweapon, weaponvalue, lblshield, shieldvalue;
 
     SurfaceView gameBoard;
 
@@ -49,8 +50,8 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-//
-//        gameBoard = (SurfaceView) findViewById(R.id.container);
+
+        gameBoard = (SurfaceView) findViewById(R.id.container);
 
         lblhp = (TextView)findViewById(R.id.lblhp);
         hpvalue = (TextView)findViewById(R.id.hpvalue);
@@ -58,6 +59,12 @@ public class GameActivity extends AppCompatActivity {
         atkvalue = (TextView)findViewById(R.id.atkvalue);
         lbldef = (TextView)findViewById(R.id.lbldef);
         defvlaue = (TextView)findViewById(R.id.defvalue);
+        lblarmor = (TextView)findViewById(R.id.lblarmor);
+        armorvalue = (TextView)findViewById(R.id.armorvalue);
+        lblweapon = (TextView)findViewById(R.id.lblweapon);
+        weaponvalue = (TextView)findViewById(R.id.weaponvalue);
+        lblshield = (TextView)findViewById(R.id.lblshield);
+        shieldvalue = (TextView)findViewById(R.id.shieldvalue);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
 
@@ -67,41 +74,49 @@ public class GameActivity extends AppCompatActivity {
         atkvalue.setTypeface(tf);
         lbldef.setTypeface(tf);
         defvlaue.setTypeface(tf);
-//
-//        gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
-//            @Override
-//            public void surfaceCreated(SurfaceHolder surfaceHolder) {
-//                thread = new DrawingThread(gameBoard.getHolder());
-//                thread.setRunning(true);
-//                thread.start();
-//
-//                tryDrawing(surfaceHolder);
-//            }
-//
-//            @Override
-//            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-//                tryDrawing(surfaceHolder);
-//            }
-//
-//            @Override
-//            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-//
-//            }
-//
-//            private void tryDrawing(SurfaceHolder holder) {
-//                Log.i("", "Trying to draw...");
-//
-//                Canvas canvas = holder.lockCanvas();
-//                if (canvas == null) {
-//                    Log.e("", "Cannot draw onto the canvas as it's null");
-//                } else {
-//                    draw(canvas);
-//                    holder.unlockCanvasAndPost(canvas);
-//                }
-//            }
-//
-//
-//        });
+
+        lblarmor.setTypeface(tf);
+        armorvalue.setTypeface(tf);
+        lblshield.setTypeface(tf);
+        shieldvalue.setTypeface(tf);
+        lblweapon.setTypeface(tf);
+        weaponvalue.setTypeface(tf);
+
+        gameBoard.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                thread = new DrawingThread(gameBoard.getHolder());
+                thread.setRunning(true);
+                thread.start();
+
+                tryDrawing(surfaceHolder);
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+                tryDrawing(surfaceHolder);
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+            }
+
+            private void tryDrawing(SurfaceHolder holder) {
+                Log.i("", "Trying to draw...");
+
+                Canvas canvas = holder.lockCanvas();
+                if (canvas == null) {
+                    Log.e("", "Cannot draw onto the canvas as it's null");
+                } else {
+                    draw(canvas);
+                    holder.unlockCanvasAndPost(canvas);
+                }
+            }
+
+
+        });
+
 
         dbh = new DatabaseHelper(getBaseContext());
         //Get id from sharedpreference;
@@ -267,6 +282,7 @@ public class GameActivity extends AppCompatActivity {
             // ... or draw a bitmap
             Bitmap board = BitmapFactory.decodeResource(getResources(),R.drawable.boardsized);
             Bitmap monster = BitmapFactory.decodeResource(getResources(), R.drawable.monster);
+
 
             // the -(android.getWidth()/2) is just so that we can center the icon to the avatar's center
             //  canvas.drawBitmap(board, avatarX-(android.getWidth()/2), avatarY-, null);
