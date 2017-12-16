@@ -91,9 +91,9 @@ public class Alarm extends AppCompatActivity {
                 else minuteString = String.valueOf(minute);
                 long alarmTime;
 
-                    if (alarmCalendar.getTimeInMillis() <= currentCalendar.getTimeInMillis())
+                if (alarmCalendar.getTimeInMillis() <= currentCalendar.getTimeInMillis())
                         alarmTime = alarmCalendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY + 1);
-                    else
+                else
                         alarmTime = alarmCalendar.getTimeInMillis();
 
 
