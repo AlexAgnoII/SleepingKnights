@@ -19,6 +19,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.alexagnoii.sleepingknights.DialogFragments.HelpFragment;
 import com.example.alexagnoii.sleepingknights.DialogFragments.SettingsFragment;
@@ -193,6 +194,15 @@ public class GameActivity extends AppCompatActivity {
             }
             else {
                 Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+
+                //if equal, dont equip.
+                if(weaponCheck == id) {
+                    Toast.makeText(getBaseContext(), "Already equipped!", Toast.LENGTH_SHORT);
+                }
+                //If not, equip.
+                else {
+
+                }
             }
 
         }
@@ -208,6 +218,12 @@ public class GameActivity extends AppCompatActivity {
             }
             else {
                 Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+                if(armorCheck == id) {
+
+                }
+                else {
+
+                }
             }
             Log.i("LOGS|GAMEACTIVITY", dsp.getLong("armor", -1)+"");
 
@@ -226,6 +242,12 @@ public class GameActivity extends AppCompatActivity {
             }
             else {
                 Log.i("LOGS|GAMEACTIVITY", "Has equiped");
+                if(shieldCheck == id) {
+
+                }
+                else {
+
+                }
             }
 
         }
