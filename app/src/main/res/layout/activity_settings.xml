@@ -36,11 +36,15 @@
 
     <Button
         android:id="@+id/btn_editAlarm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:background="@drawable/field"
+        android:fontFamily="monospace"
         android:text="Configure"
-        android:textSize="10dp"/>
+        android:textSize="10dp"
+        android:layout_margin="3dp"
+        android:textStyle="italic"
+        android:layout_gravity="center_horizontal" />
 
     <Switch
         android:id="@+id/switch_sound"

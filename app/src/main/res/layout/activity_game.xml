@@ -99,8 +99,58 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="45dp"
         android:layout_toRightOf="@id/container">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="3dp">
+
+            <TextView
+                android:id="@+id/lbllevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="HP: "
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/levelvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="50"
+                android:textSize="15dp"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="3dp">
+
+            <TextView
+                android:id="@+id/lblxp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="HP: "
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/xpvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:text="50"
+                android:textSize="15dp"
+                android:layout_marginRight="20dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -114,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="HP: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/hpvalue"
@@ -122,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="50"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>
@@ -139,7 +189,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="ATK: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/atkvalue"
@@ -147,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="1"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>
@@ -164,7 +214,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="DEF: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/defvalue"
@@ -172,7 +222,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="1"
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
         </LinearLayout>
 
@@ -188,7 +238,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="Armor: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/armorvalue"
@@ -196,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="N/A"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>
@@ -213,7 +263,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="Weapon: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/weaponvalue"
@@ -221,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="N/A"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>
@@ -238,7 +288,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="Shield: "
-                android:textSize="17dp"/>
+                android:textSize="15dp"/>
 
             <TextView
                 android:id="@+id/shieldvalue"
@@ -246,12 +296,10 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 android:text="N/A"
-                android:textSize="17dp"
+                android:textSize="15dp"
                 android:layout_marginRight="20dp"/>
 
         </LinearLayout>
-
-
 
     </LinearLayout>
 
