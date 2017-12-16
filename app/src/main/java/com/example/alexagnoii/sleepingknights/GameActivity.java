@@ -212,10 +212,13 @@ public class GameActivity extends AppCompatActivity {
 
                 //if equal, dont equip.
                 if(weaponCheck == id) {
-                    Toast.makeText(getBaseContext(), "Already equipped!", Toast.LENGTH_SHORT);
+                    Toast.makeText(getBaseContext(), "Already equipped!", Toast.LENGTH_SHORT).show();
                 }
                 //If not, equip.
                 else {
+                    performNewEquip(item, "weapon");
+                    dspEditor.putLong("weapon", id);
+                    dspEditor.apply();
 
                 }
             }
@@ -234,10 +237,12 @@ public class GameActivity extends AppCompatActivity {
             else {
                 Log.i("LOGS|GAMEACTIVITY", "Has equiped");
                 if(armorCheck == id) {
-
+                    Toast.makeText(getBaseContext(), "Already equipped!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    performNewEquip(item, "armor");
+                    dspEditor.putLong("weapon", id);
+                    dspEditor.apply();
                 }
             }
             Log.i("LOGS|GAMEACTIVITY", dsp.getLong("armor", -1)+"");
@@ -258,10 +263,12 @@ public class GameActivity extends AppCompatActivity {
             else {
                 Log.i("LOGS|GAMEACTIVITY", "Has equiped");
                 if(shieldCheck == id) {
-
+                    Toast.makeText(getBaseContext(), "Already equipped!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    performNewEquip(item, "shield");
+                    dspEditor.putLong("shield", id);
+                    dspEditor.apply();
                 }
             }
 
@@ -269,6 +276,37 @@ public class GameActivity extends AppCompatActivity {
         else {
             Log.i("LOGS|GAMEACTIVITY", "didnt find wep type.");
         }
+
+    }
+
+    private void performNewEquip(Item item, String name) {
+        SharedPreferences.Editor dspEditor = dsp.edit();
+        originalValue = 0;
+        long id = dsp.getLong(name, -1);
+        Item currentItem = dbh.getItem(id);
+
+            if(name == "weapon") {
+                int currentAtk = dsp.getInt("attack", -1);
+                originalValue = currentAtk - currentItem.getBoost() + item.getBoost();
+                dspEditor.putInt("attack", originalValue);
+                dspEditor.apply();
+                atkvalue.setText(originalValue+"");
+                weaponvalue.setText(item.getName());
+            }
+            else if (name == "shield" || name == "armor") {
+                int currentDef = dsp.getInt("attack", -1);
+                originalValue = currentDef - currentItem.getBoost() + item.getBoost();
+                dspEditor.putInt("defense", originalValue);
+                dspEditor.apply();
+                defvlaue.setText(originalValue+"");
+
+                if(name == "armor") {
+                    armorvalue.setText(item.getName());
+                }
+                else {
+                    shieldvalue.setText(item.getName());
+                }
+            }
 
     }
 
@@ -283,12 +321,21 @@ public class GameActivity extends AppCompatActivity {
                 dspEditor.putInt("attack", originalValue+item.getBoost());
                 dspEditor.apply();
                 atkvalue.setText(originalValue+item.getBoost()+"");
+
+                weaponvalue.setText(item.getName());
             }
             else if(name == "armor" || name == "shield") {
                 originalValue = Integer.parseInt(defvlaue.getText().toString());
                 dspEditor.putInt("defense", originalValue+item.getBoost());
                 dspEditor.apply();
                 defvlaue.setText(originalValue+item.getBoost()+"");
+
+                if(name == "armor") {
+                    armorvalue.setText(item.getName());
+                }
+                else {
+                    shieldvalue.setText(item.getName());
+                }
             }
 
     }
