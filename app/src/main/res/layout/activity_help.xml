@@ -13,7 +13,7 @@
         android:layout_height="270dp"
         android:layout_marginTop="3dp"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"></android.support.v7.widget.RecyclerView>
+        android:padding="5dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
 
