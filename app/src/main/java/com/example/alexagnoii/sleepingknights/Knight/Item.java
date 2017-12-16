@@ -19,12 +19,15 @@ public class Item {
     protected String description;
     protected int cost;
     protected int skinId;
+    protected int boost;
+    protected int type;
 
-    public Item(String name, String description, int cost, int skinId) {
+    public Item(String name, String description, int boost, int cost, int skinId, int type) {
         this.name = name;
         this.description = description;
         this.cost = cost;
         this.skinId = skinId;
+        this.type = type;
     }
 
     public Item(long id, String name, String description, int cost, int skinId) {
@@ -47,6 +50,10 @@ public class Item {
         this.name = name;
         this.description = description;
         this.cost = cost;
+    }
+
+    public Item() {
+
     }
 
     public String getName() {
@@ -83,5 +90,21 @@ public class Item {
 
     public void setSkinId(int skinId) {
         this.skinId = skinId;
+    }
+
+    public int getBoost() {
+        return boost;
+    }
+
+    public void setBoost(int boost) {
+        this.boost = boost;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

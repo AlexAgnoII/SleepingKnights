@@ -14,8 +14,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.alexagnoii.sleepingknights.Knight.Knight;
-
 public class CharCreationActivity extends AppCompatActivity{
 
     private final int maxStatAdded = 5,
@@ -241,23 +239,22 @@ public class CharCreationActivity extends AppCompatActivity{
     }
 
     private void addUser() {
-        Knight k = new Knight(userName, parseStringToInt(tvHP.getText()),
-                                        parseStringToInt(tvATK.getText()),
-                                        parseStringToInt(tvDEF.getText()));
-        k.setId(1); //set id
         SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         SharedPreferences.Editor dspEditor = dsp.edit();
 
 
-        dspEditor.putLong("id", k.getId());
-        dspEditor.putString("name", k.getName());
-        dspEditor.putInt("hp", k.getHealthPoints());
-        dspEditor.putInt("currentHp", k.getCurrentHP());
-        dspEditor.putInt("attack", k.getAttack());
-        dspEditor.putInt("defense", k.getDefense());
-        dspEditor.putLong("level", k.getLevel());
-        dspEditor.putLong("exp", k.getExp());
-        dspEditor.putLong("gold", k.getGold());
+        dspEditor.putLong("id", 1);
+        dspEditor.putString("name", userName);
+        dspEditor.putInt("hp", parseStringToInt(tvHP.getText()));
+        dspEditor.putInt("currentHp", parseStringToInt(tvHP.getText()));
+        dspEditor.putInt("attack", parseStringToInt(tvATK.getText()));
+        dspEditor.putInt("defense", parseStringToInt(tvDEF.getText()));
+        dspEditor.putLong("level", 1);
+        dspEditor.putLong("exp", 0);
+        dspEditor.putLong("gold", 100);
+        dspEditor.putInt("weapon", 0);
+        dspEditor.putInt("armor", 0);
+        dspEditor.putInt("shield", 0);
 
         //Initialize armor, weapon, shield here
         //amror
@@ -275,6 +272,9 @@ public class CharCreationActivity extends AppCompatActivity{
         Log.i("LOGS|CHARCREATE", "level:" + dsp.getLong("level", -1));
         Log.i("LOGS|CHARCREATE", "exp:" + dsp.getLong("exp", -1));
         Log.i("LOGS|CHARCREATE", "gold:" + dsp.getLong("gold", -1));
+        Log.i("LOGS|CHARCREATE", "Weapon:" + dsp.getInt("weapon", -1));
+        Log.i("LOGS|CHARCREATE", "Armor:" + dsp.getInt("armor", -1));
+        Log.i("LOGS|CHARCREATE", "Shield:" + dsp.getInt("shield", -1));
 
     }
 

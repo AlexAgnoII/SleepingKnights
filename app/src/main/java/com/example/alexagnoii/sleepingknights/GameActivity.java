@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 import com.example.alexagnoii.sleepingknights.DialogFragments.HelpFragment;
 import com.example.alexagnoii.sleepingknights.DialogFragments.SettingsFragment;
-import com.example.alexagnoii.sleepingknights.Knight.Knight;
+import com.example.alexagnoii.sleepingknights.Knight.Item;
 
 public class GameActivity extends AppCompatActivity {
     public static final int NOTIFICATION_ID_PB = 0;
@@ -33,7 +33,6 @@ public class GameActivity extends AppCompatActivity {
     RelativeLayout bg;
     Button btnSettings, btnHelp, btnMarket, btnInventory;
     DatabaseHelper dbh;
-    Knight knight;
     SharedPreferences dsp;
 
     TextView lblhp, hpvalue, lblatk, atkvalue, lbldef, defvlaue;
@@ -122,8 +121,20 @@ public class GameActivity extends AppCompatActivity {
         btnInventory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SimpleDialog sd = new SimpleDialog(R.layout.inventory);
-                sd.show(getSupportFragmentManager(), "");
+                //SimpleDialog sd = new SimpleDialog(R.layout.inventory);
+                //sd.show(getSupportFragmentManager(), "");
+                InventoryDialog id = new InventoryDialog(GameActivity.this);
+                id.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                id.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                id.show();
+
+                //Equiping happens here
+                id.setOnClickListener(new InventoryDialog.OnClickListener() {
+                    @Override
+                    public void onItemClick(long id) {
+                        Log.i("LOGS|GAMEACTIVITY", "Equip: " + (id+""));
+                    }
+                });
 
             }
         });
@@ -231,10 +242,21 @@ public class GameActivity extends AppCompatActivity {
             Log.i("LOGS|GAMEACTIVITY", "Attack: " + dsp.getInt("attack", -1));
             Log.i("LOGS|GAMEACTIVITY", "Defense: " + dsp.getInt("defense", -1));
 
+            hpvalue.setText(dsp.getInt("hp", -1)+"");
+            atkvalue.setText(dsp.getInt("attack", -1)+"");
+            defvlaue.setText(dsp.getInt("defense", -1)+"");
+
         }
 
         else {
             Log.i("LOGS|GAMEACTIVITY", "No id for some reason wtf la?");
         }
+    }
+
+    private void updateAtk(Long id) {
+        Item item = dbh.getItem(id);
+
+        int prev = Integer.parseInt(atkvalue.getText().toString());
+        atkvalue.setText((prev+item.getBoost())+"");
     }
 }

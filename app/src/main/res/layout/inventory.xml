@@ -15,5 +15,12 @@
         android:layout_centerHorizontal="true"
         android:padding="10dp"></android.support.v7.widget.RecyclerView>
 
+    <Button android:id="@+id/equip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Equip"
+        android:layout_marginTop="250dp">
+    </Button>
+
 </RelativeLayout>
 

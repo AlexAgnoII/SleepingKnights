@@ -3,15 +3,11 @@ package com.example.alexagnoii.sleepingknights;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.alexagnoii.sleepingknights.Knight.Armor;
 import com.example.alexagnoii.sleepingknights.Knight.Item;
-import com.example.alexagnoii.sleepingknights.Knight.Knight;
-import com.example.alexagnoii.sleepingknights.Knight.Weapon;
 
 import java.util.ArrayList;
 
@@ -94,9 +90,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void generateItems(SQLiteDatabase sqLiteDatabase) {
         ArrayList<Item> itemList = new ArrayList<Item>();
         //These are the default weapons, must always be ID 1, 2, 3
-        Weapon defaultWeapon = new Weapon(/*Name*/"Blade", /*Desc*/ "a normal blade", /*Atk*/ 1, /*Cost*/ 0, /*SkinId*/1);
-        Armor defaultArmor = new Armor(/*Name*/"Armor", /*Desc*/"a simple armor", /*Def*/1, /*Cost*/0, /*SkinId*/2),
-                defaultShield = new Armor(/*Name*/"Shield", /*Desc*/"a simple shield", /*Def*/1, /*Cost*/0, /*SkinId*/3);
+        Item defaultWeapon = new Item(/*Name*/"Blade", /*Desc*/ "a normal blade", /*Atk*/ 1, /*Cost*/ 0, /*SkinId*/1, 1),
+             defaultArmor = new Item(/*Name*/"Armor", /*Desc*/"a simple armor", /*Def*/1, /*Cost*/0, /*SkinId*/2, 2),
+             defaultShield = new Item(/*Name*/"Shield", /*Desc*/"a simple shield", /*Def*/1, /*Cost*/0, /*SkinId*/3, 3);
 
 
         itemList.add(defaultArmor);
@@ -104,31 +100,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         itemList.add(defaultShield);
 
         //These are the rest of the items
-        itemList.add(new Weapon("Blade of Wow!", "its so wow!", 2, 10, 4));
-        itemList.add(new Weapon("Blade of WTF?", "idk WTF?", 3, 20, 5));
-        itemList.add(new Weapon("Blade of OMFG!", "OMFG OMFG", 4, 30, 6));
-        itemList.add(new Armor("Armor of Wow!", "such wow armor!", 2, 10, 7));
-        itemList.add(new Armor("Armor of WTF!", "such WTF armor!", 3, 20, 8));
-        itemList.add(new Armor("Armor of OMFG!", "Suc- OMFG OMFG!", 4, 30, 9));
-        itemList.add(new Armor("Shield of Shield", "Shieldception!", 5, 15, 10));
-        itemList.add(new Armor("Shield without Shield!", "Shield using no shield!", 10, 50, 11));
+        itemList.add(new Item("Blade of Wow!", "its so wow!", 2, 10, 4, 1));
+        //itemList.add(new Weapon("Blade of WTF?", "idk WTF?", 3, 20, 5));
+        //itemList.add(new Weapon("Blade of OMFG!", "OMFG OMFG", 4, 30, 6));
+        itemList.add(new Item("Armor of Wow!", "such wow armor!", 2, 10, 7, 2));
+        //itemList.add(new Armor("Armor of WTF!", "such WTF armor!", 3, 20, 8));
+        //itemList.add(new Armor("Armor of OMFG!", "Suc- OMFG OMFG!", 4, 30, 9));
+        itemList.add(new Item("Shield of Shield", "Shieldception!", 5, 15, 10, 3));
+        //itemList.add(new Armor("Shield without Shield!", "Shield using no shield!", 10, 50, 11));
 
 
         //Add to DB (item)
         for (int i = 0; i < itemList.size(); i++) {
             Log.i("LOGS|DATABASEHELPER", itemList.get(i).getName());
-            if(itemList.get(i) instanceof Armor) {
-                //Log.i("LOGS|DATABASEHELPER", itemList.get(i).getName());
-               addArmor((Armor) itemList.get(i), sqLiteDatabase);
-            }
-            else if (itemList.get(i) instanceof Weapon) {
-                addWeapon((Weapon) itemList.get(i), sqLiteDatabase);
-            }
-
-            else {
-                Log.i("LOGS|DATABASEHELPER", "Fail to identify item type.");
-            }
-
+            addItem(itemList.get(i), itemList.get(i).getType(), sqLiteDatabase);
         }
 
         //Add to DB (Inventory)
@@ -138,151 +123,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+    public long addItem(Item item, int type, SQLiteDatabase db) {
 
-
-    public long addArmor(Armor armor, SQLiteDatabase db){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Armor.COLUMN_NAME, armor.getName());
-        contentValues.put(Armor.COLUMN_BOOST, armor.getDefenseIncrease());
-        contentValues.put(Armor.COLUMN_DESCRIPTION, armor.getDescription());
-        contentValues.put(Armor.COLUMN_COST, armor.getCost());
-        contentValues.put(Armor.COLUMN_SKIN, armor.getSkinId());
-        contentValues.put(Armor.COLUMN_TYPE, 2);
+        contentValues.put(Item.COLUMN_NAME, item.getName());
+        contentValues.put(Item.COLUMN_BOOST, item.getBoost());
+        contentValues.put(Item.COLUMN_DESCRIPTION, item.getDescription());
+        contentValues.put(Item.COLUMN_COST, item.getCost());
+        contentValues.put(Item.COLUMN_SKIN, item.getSkinId());
+        contentValues.put(Item.COLUMN_TYPE, type);
 
-        long id = db.insert(Armor.TABLE_NAME, null, contentValues);
+        long id = db.insert(item.TABLE_NAME, null, contentValues);
         //db.close();
         Log.i("LOGS", id+"");
         return id;
     }
 
-    public long addWeapon(Weapon weapon, SQLiteDatabase db){
+    public long addItem(Item item, int type) {
+        SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
-        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
-        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
-        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
-        contentValues.put(Weapon.COLUMN_SKIN, weapon.getSkinId());
-        contentValues.put(Weapon.COLUMN_TYPE, 1);
+        contentValues.put(Item.COLUMN_NAME, item.getName());
+        contentValues.put(Item.COLUMN_BOOST, item.getBoost());
+        contentValues.put(Item.COLUMN_DESCRIPTION, item.getDescription());
+        contentValues.put(Item.COLUMN_COST, item.getCost());
+        contentValues.put(Item.COLUMN_SKIN, item.getSkinId());
+        contentValues.put(Item.COLUMN_TYPE, type);
 
-        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
-        //db.close();
+        long id = db.insert(item.TABLE_NAME, null, contentValues);
+        db.close();
         Log.i("LOGS", id+"");
         return id;
-    }
-
-    public long addArmor(Armor armor){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Armor.COLUMN_NAME, armor.getName());
-        contentValues.put(Armor.COLUMN_BOOST, armor.getDefenseIncrease());
-        contentValues.put(Armor.COLUMN_DESCRIPTION, armor.getDescription());
-        contentValues.put(Armor.COLUMN_COST, armor.getCost());
-
-        long id = db.insert(Armor.TABLE_NAME, null, contentValues);
-        db.close();
-        return id;
-    }
-
-    public boolean updateArmor(Armor updatedArmor, int id){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Armor.COLUMN_NAME, updatedArmor.getName());
-        contentValues.put(Armor.COLUMN_BOOST, updatedArmor.getDefenseIncrease());
-        contentValues.put(Armor.COLUMN_DESCRIPTION, updatedArmor.getDescription());
-        contentValues.put(Armor.COLUMN_COST, updatedArmor.getCost());
-
-        db.update(Armor.TABLE_NAME, contentValues, Armor.COLUMN_ID + "=?", new String[]{updatedArmor.getId() + ""});
-        return true;
-    }
-
-    public Armor getArmor(long id){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.query(Armor.TABLE_NAME,
-                null,
-                Armor.COLUMN_ID + "= ?",
-                new String[]{id + ""},
-                null,
-                null,
-                null);
-        Armor a = null;
-        if(c.moveToFirst()) {
-            a = new Armor();
-            a.setName(c.getString(c.getColumnIndex(Armor.COLUMN_NAME)));
-            a.setDefenseIncrease(c.getInt(c.getColumnIndex(Armor.COLUMN_BOOST)));
-            a.setDescription(c.getString(c.getColumnIndex(Armor.COLUMN_DESCRIPTION)));
-            a.setCost(c.getInt(c.getColumnIndex(Armor.COLUMN_COST)));
-            a.setId(id);
-        }
-
-        c.close();
-        db.close();
-        return a;
-    }
-
-    public boolean deleteArmor (long id){
-
-        SQLiteDatabase db = getWritableDatabase();
-        int rowsAffected = db.delete(Armor.TABLE_NAME,
-                Armor.COLUMN_ID +  "= ?",
-                new String[]{id + ""});
-        return rowsAffected > 0;
-    }
-
-    public long addWeapon(Weapon weapon){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Weapon.COLUMN_NAME, weapon.getName());
-        contentValues.put(Weapon.COLUMN_BOOST, weapon.getAttackIncrease());
-        contentValues.put(Weapon.COLUMN_DESCRIPTION, weapon.getDescription());
-        contentValues.put(Weapon.COLUMN_COST, weapon.getCost());
-
-        long id = db.insert(Weapon.TABLE_NAME, null, contentValues);
-        db.close();
-        return id;
-    }
-
-    public boolean updateWeapon(Weapon updatedWeapon, int id){
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Armor.COLUMN_NAME, updatedWeapon.getName());
-        contentValues.put(Armor.COLUMN_BOOST, updatedWeapon.getAttackIncrease());
-        contentValues.put(Armor.COLUMN_DESCRIPTION, updatedWeapon.getDescription());
-        contentValues.put(Armor.COLUMN_COST, updatedWeapon.getCost());
-
-        db.update(Weapon.TABLE_NAME, contentValues, Weapon.COLUMN_ID + "=?", new String[]{updatedWeapon.getId() + ""});
-        return true;
-    }
-
-    public Weapon getWeapon(long id){
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor c = db.query(Armor.TABLE_NAME,
-                null,
-                Armor.COLUMN_ID + "= ?",
-                new String[]{id + ""},
-                null,
-                null,
-                null);
-        Weapon w = null;
-        if(c.moveToFirst()) {
-            w = new Weapon();
-            w.setName(c.getString(c.getColumnIndex(Armor.COLUMN_NAME)));
-            w.setAttackIncrease((c.getInt(c.getColumnIndex(Armor.COLUMN_BOOST))));
-            w.setDescription(c.getString(c.getColumnIndex(Armor.COLUMN_DESCRIPTION)));
-            w.setCost(c.getInt(c.getColumnIndex(Armor.COLUMN_COST)));
-            w.setId(id);
-        }
-        c.close();
-        db.close();
-        return w;
-    }
-
-    public boolean deleteWeapon (long id){
-
-        SQLiteDatabase db = getWritableDatabase();
-        int rowsAffected = db.delete(Weapon.TABLE_NAME,
-                Weapon.COLUMN_ID +  "= ?",
-                new String[]{id + ""});
-        return rowsAffected > 0;
     }
 
     public long addToInventory(long itemId, SQLiteDatabase db) {
@@ -290,6 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("item_id", itemId);
 
         long id = db.insert("inventory", null, contentValues);
+        //db.close();
         return id;
     }
 
@@ -301,5 +172,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert("inventory", null, contentValues);
         db.close();
         return id;
+    }
+
+    public Item getItem(long id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(Item.TABLE_NAME,
+                null,
+                Item.COLUMN_ID + "=?",
+                new String[]{ id+"" },
+                null,
+                null,
+                null);
+
+        Item item = null;
+        if(c.moveToFirst()){
+                item = new Item(c.getString(c.getColumnIndex(Item.COLUMN_NAME)),
+                                      c.getString(c.getColumnIndex(Item.COLUMN_DESCRIPTION)),
+                                      c.getInt(c.getColumnIndex(Item.COLUMN_BOOST)),
+                                      c.getInt(c.getColumnIndex(Item.COLUMN_COST)),
+                                      c.getInt(c.getColumnIndex(Item.COLUMN_SKIN)),
+                                      c.getInt(c.getColumnIndex(Item.COLUMN_TYPE))
+                                );
+
+
+        }
+
+        c.close();
+        db.close();
+
+        return item;
+    }
+
+    public Cursor getAllInventoryItems() {
+        SQLiteDatabase db = getReadableDatabase();
+        return db.query("inventory", null,null,null,null,null,null);
     }
 }

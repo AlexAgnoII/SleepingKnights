@@ -38,8 +38,8 @@ public class MarketDialog extends Dialog {
 
         rvMarket = (RecyclerView) findViewById(R.id.rv_marketItems);
         rvMarket.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        ma  = new MarketAdapter(getContext(), marketList);
-        rvMarket.setAdapter(ma);
+        //ma  = new MarketAdapter(getContext(), marketList);
+        //rvMarket.setAdapter(ma);
 
        // lblMarket = (TextView)findViewById(R.id.lblmarket);
 

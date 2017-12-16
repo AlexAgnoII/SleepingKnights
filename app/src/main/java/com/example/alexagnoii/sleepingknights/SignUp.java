@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.alexagnoii.sleepingknights.Knight.Knight;
-
 /**
  * Created by jessganoww on 11/12/17.
  */
