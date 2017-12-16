@@ -1,6 +1,7 @@
 package com.example.alexagnoii.sleepingknights;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,13 @@ public class Bonus extends AppCompatActivity {
         statBonus = (TextView) findViewById(R.id.tv_randomStatBonus);
         randomStat = (TextView) findViewById(R.id.lbl_randomStat);
         btnProceed = (Button) findViewById(R.id.btn_bonusProceed);
+
+        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
+
+        goldBonus.setTypeface(tf);
+        statBonus.setTypeface(tf);
+        randomStat.setTypeface(tf);
+        btnProceed.setTypeface(tf);
 
         getBonusGold();
         getBonusStat();

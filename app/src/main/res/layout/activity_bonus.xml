@@ -26,15 +26,7 @@
             android:gravity="center"
             android:textColor="#ffffff"
             android:textSize="15dp"
-            android:text="Congratulations on waking up on your alarm! Here are your bonuses"/>
-
-        <TextView
-            android:id="@+id/createMessage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/tv_congratulations"
-            android:layout_marginBottom="15dp"/>
+            android:text="Waking up on time reward! Today you got..."/>
 
         <TextView
             android:id="@+id/pointsRemaining"
@@ -54,8 +46,6 @@
             android:gravity="center"
             android:layout_below="@+id/tv_congratulations"
             android:layout_alignParentStart="true">
-
-
 
             <RelativeLayout
                 android:id="@+id/layoutATK"
