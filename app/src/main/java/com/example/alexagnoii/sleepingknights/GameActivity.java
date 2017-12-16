@@ -148,10 +148,13 @@ public class GameActivity extends AppCompatActivity {
                 //Equiping happens here
                 id.setOnClickListener(new InventoryDialog.OnClickListener() {
                     @Override
-                    public void onItemClick(long id) {
+                    public void onItemClick(long id, int kind) {
                         Log.i("LOGS|GAMEACTIVITY", "Equip: " + (id+""));
-
-                        equiping(id);
+                        if(kind == 1)
+                            equiping(id);
+                        else {
+                            unequiping(id);
+                        }
                     }
                 });
 
@@ -186,6 +189,61 @@ public class GameActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void unequiping(long id) {
+        SharedPreferences.Editor dspEditor = dsp.edit();
+        long currentArmor, currentWeapon, currentShield;
+
+        currentArmor = dsp.getLong("armor", -1);
+        currentWeapon = dsp.getLong("weapon", -1);
+        currentShield = dsp.getLong("shield", -1);
+
+        if(currentArmor == id && currentArmor != -1) {
+            Item item = dbh.getItem(id);
+            int defense = dsp.getInt("defense", -1);
+            int original;
+
+            if(defense != -1) {
+                original = defense - item.getBoost();
+                dspEditor.putInt("defense", original);
+                dspEditor.putLong("armor", 0);
+                dspEditor.apply();
+                armorvalue.setText("N/A");
+                defvlaue.setText(original+"");
+            }
+        }
+        else if(currentWeapon == id && currentWeapon != -1) {
+            Item item = dbh.getItem(id);
+            int attack = dsp.getInt("attack", -1);
+            int original;
+
+            if(attack != -1) {
+                original = attack - item.getBoost();
+                dspEditor.putInt("attack", original);
+                dspEditor.putLong("weapon", 0);
+                dspEditor.apply();
+                weaponvalue.setText("N/A");
+                atkvalue.setText(original+"");
+            }
+        }
+        else if (currentShield == id && currentShield != -1) {
+            Item item = dbh.getItem(id);
+            int defense = dsp.getInt("defense", -1);
+            int original;
+
+            if(defense != -1) {
+                original = defense - item.getBoost();
+                dspEditor.putInt("defense", original);
+                dspEditor.putLong("shield", 0);
+                dspEditor.apply();
+                shieldvalue.setText("N/A");
+                defvlaue.setText(original+"");
+            }
+        }
+        else {
+            Toast.makeText(getBaseContext(), "Currently not equipped!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void equiping(long id) {
@@ -418,6 +476,26 @@ public class GameActivity extends AppCompatActivity {
             hpvalue.setText(dsp.getInt("hp", -1)+"");
             atkvalue.setText(dsp.getInt("attack", -1)+"");
             defvlaue.setText(dsp.getInt("defense", -1)+"");
+
+            long weapon , armor , shield;
+
+            weapon = dsp.getLong("weapon", -1);
+            armor = dsp.getLong("armor", -1);
+            shield = dsp.getLong("weapon", -1);
+
+            //Only update the label
+            if(weapon != 0 && weapon != -1) {
+                Item item = dbh.getItem(weapon);
+                weaponvalue.setText(item.getName());
+            }
+            if(armor != 0 && armor != -1) {
+                Item item = dbh.getItem(armor);
+                armorvalue.setText(item.getName());
+            }
+            if (shield != 0 && shield != -1) {
+                Item item = dbh.getItem(shield);
+                shieldvalue.setText(item.getName());
+            }
 
         }
 

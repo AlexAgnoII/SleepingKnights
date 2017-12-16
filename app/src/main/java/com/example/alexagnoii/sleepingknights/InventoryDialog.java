@@ -25,7 +25,7 @@ public class InventoryDialog extends Dialog {
 
     RecyclerView rvInventory;
     InventoryAdapter ia;
-    Button btnEquip;
+    Button btnEquip, btnUnEquip;
     long itemIndex = 0;
     OnClickListener onClickListener;
     public InventoryDialog(@NonNull Context context) { super(context); }
@@ -51,16 +51,29 @@ public class InventoryDialog extends Dialog {
         });
 
         btnEquip = (Button) findViewById(R.id.equip);
+        btnUnEquip = (Button) findViewById(R.id.unequip);
 
         btnEquip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(itemIndex != 0)
-                    onClickListener.onItemClick(itemIndex);
+                    onClickListener.onItemClick(itemIndex, 1);
                 else
                     Toast.makeText(getContext(), "Please choose an item to equip!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        btnUnEquip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(itemIndex != 0)
+                    onClickListener.onItemClick(itemIndex, 0);
+                else
+                    Toast.makeText(getContext(), "Please choose an item to unequip!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
 
     }
@@ -71,6 +84,6 @@ public class InventoryDialog extends Dialog {
     }
 
     public interface OnClickListener{
-        public void onItemClick(long id);
+        public void onItemClick(long id, int kind);
     }
 }
