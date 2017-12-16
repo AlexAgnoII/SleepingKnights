@@ -2,9 +2,11 @@ package com.example.alexagnoii.sleepingknights;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +34,7 @@ public class MarketDialog extends Dialog {
     Button btnBuy;
     OnClickListener onClickListener;
     long buyingIndex = 0;
+    TextView gold;
 
     public MarketDialog(@NonNull Context context) {
         super(context);
@@ -43,6 +46,13 @@ public class MarketDialog extends Dialog {
         setContentView(R.layout.market);
 
         DatabaseHelper dbh = new DatabaseHelper(getContext());
+
+        gold = (TextView) findViewById(R.id.tv_goldBonus);
+
+
+        SharedPreferences dsp = PreferenceManager.getDefaultSharedPreferences(getContext());
+        gold.setText(dsp.getLong("gold", -1)+"");
+
 
         rvMarket = (RecyclerView) findViewById(R.id.rv_marketItems);
         rvMarket.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
