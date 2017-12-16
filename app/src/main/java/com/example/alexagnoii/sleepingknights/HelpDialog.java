@@ -38,8 +38,6 @@ public class HelpDialog extends Dialog {
                 "10 items here", R.drawable.ic_inventory));
         helpList.add(new HelpItems("Market","The market is where you can buy items to aid you " +
                 "in your adventure", R.drawable.ic_market)); */
-        helpList.add(new HelpItems("Field","In this game, you must navigate from room to room," +
-                " and try to defeat as many monters as possible. Once you leave a room, you can't go back", R.drawable.bgn1));
        /* helpList.add(new HelpItems("D-pad", "Use the dpad to move your character across the map", R.drawable.ic_help)); */
         helpList.add(new HelpItems("Potions","Using potions restores your knight's health by 40%. Use them wisely!", R.drawable.potion));
         helpList.add(new HelpItems("Gold", "The currency used in the game. You can find gold in rooms. Use them to buy potions or new weapons", R.drawable.gold));

@@ -416,12 +416,14 @@ public class GameActivity extends AppCompatActivity {
             // ... or draw a bitmap
             Bitmap board = BitmapFactory.decodeResource(getResources(),R.drawable.boardsized);
             Bitmap monster = BitmapFactory.decodeResource(getResources(), R.drawable.monster);
+            Bitmap knight = BitmapFactory.decodeResource(getResources(), R.drawable.knightchar);
 
 
             // the -(android.getWidth()/2) is just so that we can center the icon to the avatar's center
             //  canvas.drawBitmap(board, avatarX-(android.getWidth()/2), avatarY-, null);
             canvas.drawBitmap(board, 0, 0, null);
             canvas.drawBitmap(monster, (monster.getWidth()/2), (monster.getHeight()/2), null);
+            canvas.drawBitmap(knight, (knight.getWidth()/6), 350, null);
 
         }
     }
