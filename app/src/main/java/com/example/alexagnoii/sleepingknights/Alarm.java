@@ -31,7 +31,8 @@ public class Alarm extends AppCompatActivity {
 
         sp = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         spEditor = sp.edit();
-        final Calendar calendar = Calendar.getInstance();
+        final Calendar alarmCalendar = Calendar.getInstance();
+        final Calendar currentCalendar = Calendar.getInstance();
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         btnEnable = (Button) findViewById(R.id.btn_enable);
@@ -62,18 +63,18 @@ public class Alarm extends AppCompatActivity {
                 String amOrPm;
 
                 if(Build.VERSION.SDK_INT >= 23) {
-                    calendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
-                    calendar.set(Calendar.MINUTE, timePicker.getMinute());
-                    calendar.set(Calendar.SECOND, 0);
-                    calendar.set(Calendar.MILLISECOND, 0);
+                    alarmCalendar.set(Calendar.HOUR_OF_DAY, timePicker.getHour());
+                    alarmCalendar.set(Calendar.MINUTE, timePicker.getMinute());
+                    alarmCalendar.set(Calendar.SECOND, 0);
+                    alarmCalendar.set(Calendar.MILLISECOND, 0);
                     hour = timePicker.getHour();
                     minute = timePicker.getMinute();
                 }
                 else{
-                    calendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
-                    calendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
-                    calendar.set(Calendar.SECOND, 0);
-                    calendar.set(Calendar.MILLISECOND, 0);
+                    alarmCalendar.set(Calendar.HOUR_OF_DAY, timePicker.getCurrentHour());
+                    alarmCalendar.set(Calendar.MINUTE, timePicker.getCurrentMinute());
+                    alarmCalendar.set(Calendar.SECOND, 0);
+                    alarmCalendar.set(Calendar.MILLISECOND, 0);
                     minute = timePicker.getCurrentMinute();
                     hour = timePicker.getCurrentHour();
                 }
@@ -88,10 +89,16 @@ public class Alarm extends AppCompatActivity {
                 if(minute < 10)
                     minuteString = "0" + String.valueOf(minute);
                 else minuteString = String.valueOf(minute);
+                long alarmTime;
+
+                    if (alarmCalendar.getTimeInMillis() <= currentCalendar.getTimeInMillis())
+                        alarmTime = alarmCalendar.getTimeInMillis() + (AlarmManager.INTERVAL_DAY + 1);
+                    else
+                        alarmTime = alarmCalendar.getTimeInMillis();
+
 
                 pending_intent = PendingIntent.getBroadcast(Alarm.this, 0, alarmManagerIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
-
+                alarmManager.set(AlarmManager.RTC_WAKEUP, alarmTime, pending_intent);
 
                 spEditor.putInt("Minute", minute);
                 spEditor.putInt("Hour", hour);
@@ -101,6 +108,7 @@ public class Alarm extends AppCompatActivity {
                 alarmStatus.setText("Alarm set at " + hourString + ":" + minuteString + " " + amOrPm);
             }
         });
+
         btnDisable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
