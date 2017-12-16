@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class Bonus extends AppCompatActivity {
     public static final int PENDINT_SA = 0;
-    TextView goldBonus, randomStat, statBonus;
+    TextView goldBonus, randomStat, statBonus, tvCongrats, lblGold;
     String[] statList = {"ATK", "DEF", "HP"};
     Button btnProceed;
 
@@ -38,13 +38,16 @@ public class Bonus extends AppCompatActivity {
         statBonus = (TextView) findViewById(R.id.tv_randomStatBonus);
         randomStat = (TextView) findViewById(R.id.lbl_randomStat);
         btnProceed = (Button) findViewById(R.id.btn_bonusProceed);
+        tvCongrats = (TextView) findViewById(R.id.tv_congratulations);
+        lblGold = (TextView) findViewById(R.id.lbl_Gold);
 
         Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/JourneyPS3.ttf");
 
         goldBonus.setTypeface(tf);
         statBonus.setTypeface(tf);
         randomStat.setTypeface(tf);
-        btnProceed.setTypeface(tf);
+        tvCongrats.setTypeface(tf);
+        lblGold.setTypeface(tf);
 
         getBonusGold();
         getBonusStat();

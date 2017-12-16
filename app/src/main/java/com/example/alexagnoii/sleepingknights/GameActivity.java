@@ -265,7 +265,7 @@ public class GameActivity extends AppCompatActivity {
             canvas.drawRGB(255, 255, 255);
 
             // ... or draw a bitmap
-            Bitmap board = BitmapFactory.decodeResource(getResources(),R.drawable.breal);
+            Bitmap board = BitmapFactory.decodeResource(getResources(),R.drawable.boardsized);
             Bitmap monster = BitmapFactory.decodeResource(getResources(), R.drawable.monster);
 
             // the -(android.getWidth()/2) is just so that we can center the icon to the avatar's center

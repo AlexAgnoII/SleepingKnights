@@ -45,7 +45,7 @@
     </RelativeLayout>
 
     <SurfaceView
-        android:layout_width="320dp"
+        android:layout_width="275dp"
         android:layout_height="275dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"

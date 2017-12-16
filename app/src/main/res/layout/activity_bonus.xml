@@ -14,18 +14,18 @@
         android:id="@+id/mainbg"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-        `
+
         <TextView
             android:id="@+id/tv_congratulations"
             android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="45dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="40dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textColor="#ffffff"
-            android:textSize="15dp"
+            android:textSize="17dp"
             android:text="Waking up on time reward! Today you got..."/>
 
         <TextView
@@ -43,14 +43,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_below="@+id/tv_congratulations"
-            android:layout_alignParentStart="true">
+            android:layout_centerVertical="true"
+            android:layout_marginTop="15dp"
+            android:id="@+id/statslayout"
+            android:layout_below="@+id/tv_congratulations">
 
             <RelativeLayout
                 android:id="@+id/layoutATK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="40dp">
+                android:layout_marginTop="0dp"
+                android:layout_marginRight="70dp">
 
                 <TextView
                     android:id="@+id/lbl_Gold"
@@ -61,12 +64,15 @@
                     android:textColor="#ffffff"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true" />
+
                 <ImageView
                     android:layout_below="@+id/lbl_Gold"
-                    android:layout_width="50sp"
-                    android:layout_height="50sp"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_centerVertical="true"
                     android:src="@drawable/gold"
                     android:id="@+id/iv_gold"/>
+
                 <TextView
                     android:id="@+id/tv_goldBonus"
                     android:layout_width="wrap_content"
@@ -85,8 +91,7 @@
                 android:id="@+id/layoutDEF"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/layoutATK"
-                android:layout_margin="50dp">
+                android:layout_toRightOf="@id/layoutATK">
 
                 <TextView
                     android:id="@+id/lbl_randomStat"
@@ -101,6 +106,7 @@
                     android:id="@+id/tv_randomStatBonus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:text="1"
                     android:textSize="55dp"
                     android:textColor="#ffffff"
@@ -120,8 +126,9 @@
             android:text="PROCEED"
             android:textSize="10dp"
             android:textStyle="italic"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="35dp"
+            android:layout_marginTop="30dp"
+           android:layout_below="@id/statslayout"
+
             />
 
     </RelativeLayout>
